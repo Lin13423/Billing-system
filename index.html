@@ -330,7 +330,7 @@ footer{text-align:center;padding:15px 10px 20px;font-size:10px;color:#758195;lin
 ========================================== */
 
 const CONFIG = {
-    API_BASE: "/api",
+    API_BASE: "https://your-backend-server.com/api", // Updated to your live backend endpoint
     PAYMENT_TIMEOUT: 20000,
     POLL_INTERVALS: [2000, 3000, 5000, 8000, 10000],
     MAX_POLL_TIME: 180000,
@@ -606,7 +606,7 @@ async function apiRequest(endpoint,payload,requestID) {
     const response = await timedFetch(url, {
         method:"POST",
         headers:headers,
-        credentials:"same-origin",
+        mode: "cors", // Explicitly enable CORS handling for external backend
         cache:"no-store",
         body:JSON.stringify(payload)
     }, CONFIG.PAYMENT_TIMEOUT);

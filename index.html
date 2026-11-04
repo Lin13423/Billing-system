@@ -326,14 +326,12 @@ footer{text-align:center;padding:15px 10px 20px;font-size:10px;color:#758195;lin
 "use strict";
 
 /* ==========================================
-   LIN UNIVERSAL WIFI BILLING WITH SMART DEMO / MOCK FALLBACK
+   LIN UNIVERSAL WIFI BILLING - PRODUCTION REAL API
 ========================================== */
 
 const CONFIG = {
-    API_BASE: "https://your-backend-server.com/api", // If unreachable, mock mode handles requests automatically
-    PAYMENT_TIMEOUT: 20000,
-    POLL_INTERVALS: [2000, 3000, 5000, 8000, 10000],
-    MAX_POLL_TIME: 180000,
+    API_BASE: "https://your-backend-server.com/api", // ⚠️ UPDATE THIS WITH YOUR LIVE BACKEND SERVER URL (e.g. Node.js/Python server handling Safaricom Daraja STK Push)
+    PAYMENT_TIMEOUT: 25000,
     MAX_DEVICES: 20,
     STORAGE_KEY: "lin_wifi_pending_payment_v8",
     REQUEST_ID_HEADER: "X-Idempotency-Key"
@@ -399,7 +397,7 @@ function switchPortalMode(mode) {
     } else {
         tabRedeem.classList.add("active");
         tabBuy.classList.remove("active");
-        redeemSection.classList.add("hidden");
+        redeemSection.classList.remove("hidden");
         buySection.classList.add("hidden");
         payBar.classList.add("hidden");
     }
@@ -590,12 +588,12 @@ function timedFetch(url,options,timeout) {
         const timer = setTimeout(()=>{
             if(finished) return;
             finished = true;
-            reject(new Error("TIMED_OUT"));
+            reject(new Error("Server response timed out. Please verify your backend API URL and connection."));
         },timeout);
 
         if(typeof fetch !== "function") {
             clearTimeout(timer);
-            reject(new Error("NO_FETCH"));
+            reject(new Error("Browser does not support secure requests."));
             return;
         }
 
@@ -605,14 +603,14 @@ function timedFetch(url,options,timeout) {
                 if(!finished) { 
                     finished = true; 
                     clearTimeout(timer); 
-                    reject(new Error("NETWORK_FAILED"));
+                    reject(new Error("Network connection failed (Failed to fetch). Please ensure your backend server is online at " + CONFIG.API_BASE + ", CORS is enabled, and API_BASE is correct."));
                 } 
             });
     });
 }
 
 /* ==========================================
-   SMART API REQUEST WITH MOCK/DEMO FALLBACK
+   REAL LIVE API REQUEST (DARAIJA STK PUSH)
 ========================================== */
 
 async function apiRequest(endpoint,payload,requestID) {
@@ -620,49 +618,19 @@ async function apiRequest(endpoint,payload,requestID) {
     const headers = {"Content-Type":"application/json","Accept":"application/json"};
     if(requestID) headers[CONFIG.REQUEST_ID_HEADER] = requestID;
 
-    try {
-        const response = await timedFetch(url, {
-            method:"POST",
-            headers:headers,
-            mode: "cors",
-            cache:"no-store",
-            body:JSON.stringify(payload)
-        }, CONFIG.PAYMENT_TIMEOUT);
+    const response = await timedFetch(url, {
+        method:"POST",
+        headers:headers,
+        mode: "cors",
+        cache:"no-store",
+        body:JSON.stringify(payload)
+    }, CONFIG.PAYMENT_TIMEOUT);
 
-        const result = await response.json().catch(()=>({}));
-        if(!response.ok) {
-            throw new Error(result.message || "Payment request could not be processed.");
-        }
-        return result;
-    } catch (err) {
-        // SMART MOCK FALLBACK (Runs automatically if backend server is not yet deployed)
-        console.warn("Backend server unreachable. Running local demo/simulation mode.");
-        await new Promise(r => setTimeout(r, 1500)); // Simulate network latency
-
-        if (endpoint === "/payments/stkpush") {
-            return {
-                success: true,
-                checkoutRequestID: "ws_CO_" + Date.now() + "_" + Math.floor(Math.random()*1000),
-                message: "M-Pesa STK push simulated successfully."
-            };
-        }
-        if (endpoint === "/payments/status") {
-            let codes = [];
-            let qty = payload.quantity || 1;
-            for(let i=0; i<qty; i++) {
-                codes.push("LIN-" + Math.random().toString(36).substring(2, 8).toUpperCase());
-            }
-            return {
-                paymentStatus: "SUCCESS",
-                accessCode: codes[0],
-                accessCodes: codes
-            };
-        }
-        if (endpoint === "/vouchers/redeem") {
-            return { success: true, message: "Voucher redeemed successfully." };
-        }
-        throw new Error("Unable to connect to billing server.");
+    const result = await response.json().catch(()=>({}));
+    if(!response.ok) {
+        throw new Error(result.message || "Payment request could not be processed by server.");
     }
+    return result;
 }
 
 function normalizePaymentStatus(result) {
@@ -832,7 +800,7 @@ async function payNow() {
     setPaymentButton(true, "SENDING REQUEST...");
     setStatus("Processing");
     getElement("accessCodePanel").classList.add("hidden");
-    showMessage("M-Pesa payment request initiated. Check your phone...", "info");
+    showMessage("Sending M-Pesa STK Push to " + phone + ". Please check your phone...", "info");
 
     try {
         const result = await apiRequest("/payments/stkpush", payload, requestID);
@@ -843,13 +811,13 @@ async function payNow() {
         setStatus("Awaiting payment");
         setPaymentButton(true, "WAITING FOR PIN...");
         
-        // Poll for status (Simulated or live)
-        for(let i = 0; i < 5; i++) {
-            await wait(2000);
+        // Poll backend for real M-Pesa status
+        for(let i = 0; i < 20; i++) {
+            await wait(4000);
             const statusRes = await checkPaymentOnce(result.checkoutRequestID);
             if(statusRes === "PAID") return;
         }
-        throw new Error("Payment confirmation timed out. Please check if M-Pesa prompt was completed.");
+        throw new Error("Payment confirmation timed out. Please check if M-Pesa prompt was completed on your phone.");
 
     } catch(error) {
         setStatus("Payment error");

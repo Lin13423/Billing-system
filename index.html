@@ -200,64 +200,11 @@ footer{text-align:center;padding:15px 10px 20px;font-size:10px;color:#758195;lin
                 <h2>Choose Your Internet Plan</h2>
                 <p>Select a package. "Myself" connects instantly and automatically!</p>
             </div>
-            <div class="plan-tag">STEP 1 OF 3</div>
+            <div class="plan-tag">LIVE SYNCED</div>
         </div>
 
-        <div class="packages" id="packages">
-
-            <div class="package active" tabindex="0" role="button" aria-pressed="true" data-name="1 Hour" data-price="10" data-time="60" onclick="selectPackage(this)">
-                <div class="package-top"><div class="package-icon">⚡</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">1 Hour</div><div class="package-description">Quick browsing</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>10</div><span class="package-unit">60 MIN</span></div>
-                <div class="package-action">✓ SELECTED</div>
-            </div>
-
-            <div class="package" tabindex="0" role="button" aria-pressed="false" data-name="3 Hours" data-price="20" data-time="180" onclick="selectPackage(this)">
-                <div class="package-top"><div class="package-icon">♾️</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">3 Hours</div><div class="package-description">Everyday browsing</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>20</div><span class="package-unit">180 MIN</span></div>
-                <div class="package-action">SELECT PLAN</div>
-            </div>
-
-            <div class="package" tabindex="0" role="button" aria-pressed="false" data-name="6 Hours" data-price="30" data-time="360" onclick="selectPackage(this)">
-                <div class="package-top"><div class="package-icon">🌐</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">6 Hours</div><div class="package-description">Extended browsing</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>30</div><span class="package-unit">360 MIN</span></div>
-                <div class="package-action">SELECT PLAN</div>
-            </div>
-
-            <div class="package featured" tabindex="0" role="button" aria-pressed="false" data-name="12 Hours" data-price="50" data-time="720" onclick="selectPackage(this)">
-                <div class="package-badge">POPULAR</div>
-                <div class="package-top"><div class="package-icon">🔥</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">12 Hours</div><div class="package-description">Extended connectivity</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>50</div><span class="package-unit">720 MIN</span></div>
-                <div class="package-action">SELECT PLAN</div>
-            </div>
-
-            <div class="package" tabindex="0" role="button" aria-pressed="false" data-name="24 Hours" data-price="80" data-time="1440" onclick="selectPackage(this)">
-                <div class="package-top"><div class="package-icon">☀️</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">24 Hours</div><div class="package-description">Full-day connectivity</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>80</div><span class="package-unit">1 DAY</span></div>
-                <div class="package-action">SELECT PLAN</div>
-            </div>
-
-            <div class="package featured" tabindex="0" role="button" aria-pressed="false" data-name="7 Days" data-price="300" data-time="10080" onclick="selectPackage(this)">
-                <div class="package-badge">GREAT VALUE</div>
-                <div class="package-top"><div class="package-icon">📆</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">7 Days</div><div class="package-description">Weekly connectivity</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>300</div><span class="package-unit">1 WEEK</span></div>
-                <div class="package-action">SELECT PLAN</div>
-            </div>
-
-            <div class="package featured" tabindex="0" role="button" aria-pressed="false" data-name="30 Days" data-price="1000" data-time="43200" onclick="selectPackage(this)">
-                <div class="package-badge">BEST VALUE</div>
-                <div class="package-top"><div class="package-icon">👑</div><div class="package-check">✓</div></div>
-                <div class="package-info"><div class="package-duration">30 Days</div><div class="package-description">Monthly connectivity</div></div>
-                <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>1,000</div><span class="package-unit">1 MONTH</span></div>
-                <div class="package-action">SELECT PLAN</div>
-            </div>
-
-        </div>
+        <!-- DYNAMIC PACKAGES CONTAINER (Synced with Admin Panel) -->
+        <div class="packages" id="packagesContainer"></div>
 
         <div class="selected-plan-box">
             <div>
@@ -379,7 +326,7 @@ footer{text-align:center;padding:15px 10px 20px;font-size:10px;color:#758195;lin
 "use strict";
 
 /* ==========================================
-   LIN UNIVERSAL WIFI BILLING WITH AUTO-SCROLL
+   LIN UNIVERSAL WIFI BILLING WITH LIVE STORAGE SYNC
 ========================================== */
 
 const CONFIG = {
@@ -392,20 +339,16 @@ const CONFIG = {
     REQUEST_ID_HEADER: "X-Idempotency-Key"
 };
 
-let purchaseType = "Myself";
-let selected = {
-    name:"1 Hour",
-    price:10,
-    minutes:60
-};
+// Load shared packages from localStorage (synced with admin.html)
+let plans = JSON.parse(localStorage.getItem('linwifi_shared_plans_v1') || JSON.stringify([
+ {name:'1 Hour',title:'1 Hour',price:10,duration:'60 min',tag:'Quick browsing'},
+ {name:'3 Hours',title:'3 Hours',price:20,duration:'180 min',tag:'Everyday browsing'},
+ {name:'6 Hours',title:'6 Hours',price:30,duration:'360 min',tag:'Extended browsing'},
+ {name:'12 Hours',title:'12 Hours',price:50,duration:'720 min',tag:'Popular'}
+]));
 
-let paymentInProgress = false;
-let activeCheckoutRequestID = null;
-let activeRequestID = null;
-let pollingStopped = false;
-let paymentCompleted = false;
-let pollPromise = null;
-let currentTransaction = null;
+let purchaseType = "Myself";
+let selectedPlan = plans[0] || {name:"1 Hour", price:10, duration:"60 min"};
 
 function getElement(id) {
     return document.getElementById(id);
@@ -472,16 +415,6 @@ function savePendingTransaction(data) {
     } catch(error) {}
 }
 
-function loadPendingTransaction() {
-    try {
-        const raw = sessionStorage.getItem(CONFIG.STORAGE_KEY);
-        if(!raw) return null;
-        return JSON.parse(raw);
-    } catch(error) {
-        return null;
-    }
-}
-
 function clearPendingTransaction() {
     try {
         sessionStorage.removeItem(CONFIG.STORAGE_KEY);
@@ -507,11 +440,62 @@ function safeScroll(element, position="start") {
 }
 
 /* ==========================================
+   DYNAMIC PACKAGE RENDERING & SYNC
+========================================== */
+
+function renderPackages() {
+    const container = getElement('packagesContainer');
+    if(!container) return;
+    
+    container.innerHTML = plans.map((p, i) => {
+        const isSel = (selectedPlan && selectedPlan.name === p.name);
+        return `
+         <div class="package ${isSel?'active':''}" onclick="selectPackage(${i})">
+          <div class="package-top"><div class="package-icon">⚡</div><div class="package-check">✓</div></div>
+          <div class="package-info"><div class="package-duration">${p.title || p.name}</div><div class="package-description">${p.tag || p.duration}</div></div>
+          <div class="package-bottom"><div class="package-price"><span class="package-currency">KSh</span>${Number(p.price).toLocaleString()}</div><span class="package-unit">${String(p.duration || '').toUpperCase()}</span></div>
+          <div class="package-action">${isSel?'✓ SELECTED':'SELECT PLAN'}</div>
+         </div>
+        `;
+    }).join('');
+}
+
+function selectPackage(index) {
+    selectedPlan = plans[index] || plans[0];
+    renderPackages();
+    
+    getElement('packageDisplay').textContent = selectedPlan.title || selectedPlan.name;
+    getElement('selectedPackageName').textContent = selectedPlan.title || selectedPlan.name;
+    getElement('selectedPackagePrice').textContent = 'KSh ' + Number(selectedPlan.price).toLocaleString();
+    getElement('totalDisplay').textContent = 'KSh ' + Number(selectedPlan.price).toLocaleString();
+    getElement('barTotal').textContent = 'KSh ' + Number(selectedPlan.price).toLocaleString();
+    
+    updateTotal();
+    hideMessage();
+
+    // Auto-scroll down to device selection on package tap
+    safeScroll(getElement("deviceSelection"), "start");
+}
+
+// Listen for updates when admin.html modifies shared plans in localStorage
+window.addEventListener('storage', (e) => {
+    if(e.key === 'linwifi_shared_plans_v1') {
+        try {
+            plans = JSON.parse(e.newValue || '[]');
+            if(plans.length > 0) {
+                selectedPlan = plans[0];
+                renderPackages();
+                selectPackage(0);
+            }
+        } catch(err) {}
+    }
+});
+
+/* ==========================================
    DEVICE & PACKAGE SELECTION
 ========================================== */
 
 function choose(el,type) {
-    if(paymentInProgress || activeCheckoutRequestID) return;
     document.querySelectorAll(".choice").forEach(x=>x.classList.remove("active"));
     el.classList.add("active");
     purchaseType = type;
@@ -523,35 +507,6 @@ function choose(el,type) {
     getElement("phone").placeholder = "07XXXXXXXX";
     updateTotal();
     hideMessage();
-}
-
-function selectPackage(el) {
-    if(paymentInProgress || activeCheckoutRequestID) return;
-    document.querySelectorAll(".package").forEach(x=>{
-        x.classList.remove("active");
-        x.setAttribute("aria-pressed","false");
-        const action = x.querySelector(".package-action");
-        if(action) action.textContent = "SELECT PLAN";
-    });
-    el.classList.add("active");
-    el.setAttribute("aria-pressed","true");
-    const action = el.querySelector(".package-action");
-    if(action) action.textContent = "✓ SELECTED";
-
-    selected = {
-        name: el.dataset.name,
-        price: Number(el.dataset.price),
-        minutes: Number(el.dataset.time)
-    };
-
-    getElement("packageDisplay").textContent = selected.name;
-    getElement("selectedPackageName").textContent = selected.name;
-    getElement("selectedPackagePrice").textContent = "KSh " + selected.price.toLocaleString("en-KE");
-    updateTotal();
-    hideMessage();
-
-    // AUTO-SCROLL DOWN TO DEVICE SELECTION ON PACKAGE SELECTION
-    safeScroll(getElement("deviceSelection"), "start");
 }
 
 function getQuantity() {
@@ -566,7 +521,7 @@ function getQuantity() {
 function updateTotal() {
     try {
         const quantity = getQuantity();
-        const total = selected.price * quantity;
+        const total = Number(selectedPlan.price) * quantity;
         const formatted = "KSh " + total.toLocaleString("en-KE");
         getElement("deviceDisplay").textContent = quantity;
         getElement("totalDisplay").textContent = formatted;
@@ -578,7 +533,9 @@ function updateTotal() {
     }
 }
 
-getElement("quantity").addEventListener("input",updateTotal);
+if(getElement("quantity")) {
+    getElement("quantity").addEventListener("input", updateTotal);
+}
 
 function normalizePhone(value) {
     let phone = String(value || "").replace(/[\s\-()]/g,"");
@@ -593,6 +550,7 @@ function normalizePhone(value) {
 
 function setPaymentButton(loading,label) {
     const button = getElement("payButton");
+    if(!button) return;
     button.disabled = !!loading;
     button.innerHTML = loading
         ? '<span class="loader"></span> ' + (label || "PROCESSING...")
@@ -600,7 +558,8 @@ function setPaymentButton(loading,label) {
 }
 
 function setStatus(text) {
-    getElement("connectionStatus").textContent = text;
+    const statusEl = getElement("connectionStatus");
+    if(statusEl) statusEl.textContent = text;
 }
 
 function createRequestID() {
@@ -664,7 +623,7 @@ function normalizePaymentStatus(result) {
 }
 
 /* ==========================================
-   PAYMENT SUCCESS HANDLER (INSTANT vs CODES)
+   PAYMENT SUCCESS HANDLER
 ========================================== */
 
 function displayAccessCodes(result) {
@@ -672,6 +631,7 @@ function displayAccessCodes(result) {
     const subTitle = getElement("accessPanelSub");
     const instructionsBox = getElement("codeInstructionsBox");
     
+    if(!list) return;
     list.innerHTML = "";
 
     if(purchaseType === "Myself") {
@@ -683,8 +643,6 @@ function displayAccessCodes(result) {
             3. You can now browse the internet freely without entering any code!
         `;
         getElement("accessCodePanel").classList.remove("hidden");
-        
-        // AUTO-SCROLL TO CONFIRMATION PANEL
         safeScroll(getElement("accessCodePanel"), "center");
 
         setTimeout(() => {
@@ -735,17 +693,7 @@ function displayAccessCodes(result) {
         list.appendChild(item);
     });
 
-    instructionsBox.innerHTML = `
-        <strong>How to connect your device (${purchaseType}):</strong><br>
-        1. Connect your TV, Computer, or Phone to the <strong>Lin WiFi</strong> network.<br>
-        2. Open your browser or captive portal login page (or enter code when prompted).<br>
-        3. Click the <strong>COPY CODE</strong> button next to your unique code and paste it to activate.<br>
-        4. <strong>Single-Use Security:</strong> Once activated on that gadget, the code is locked to it. If tried elsewhere, it will report as already used.
-    `;
-
     getElement("accessCodePanel").classList.remove("hidden");
-    
-    // AUTO-SCROLL TO CONFIRMATION PANEL
     safeScroll(getElement("accessCodePanel"), "center");
 }
 
@@ -776,16 +724,11 @@ async function checkPaymentOnce(checkoutRequestID) {
 
     if(status === "PAID" || status === "SUCCESS" || status === "COMPLETED") {
         displayAccessCodes(result);
-        paymentCompleted = true;
-        paymentInProgress = false;
         clearPendingTransaction();
         
         let successMsg = "Payment confirmed successfully! Connected automatically.";
         if(purchaseType !== "Myself") {
             successMsg = "Payment confirmed successfully! Your unique access code is ready below.";
-        }
-        if(result.accumulatedMinutes) {
-            successMsg += ` (Duplicate payment stacked: +${result.addedMinutes || selected.minutes} mins added!)`;
         }
 
         showMessage(successMsg, "success");
@@ -797,41 +740,12 @@ async function checkPaymentOnce(checkoutRequestID) {
 
     if(status === "FAILED" || status === "CANCELLED" || status === "EXPIRED") {
         clearPendingTransaction();
-        activeCheckoutRequestID = null;
-        activeRequestID = null;
         throw new Error(result.message || "The M-Pesa payment was not completed.");
     }
     return "PENDING";
 }
 
-async function checkPaymentUntilComplete(checkoutRequestID) {
-    if(pollPromise) return pollPromise;
-    pollingStopped = false;
-
-    pollPromise = (async()=>{
-        const startTime = Date.now();
-        let attempt = 0;
-
-        while(!pollingStopped && !paymentCompleted && Date.now() - startTime < CONFIG.MAX_POLL_TIME) {
-            const delay = CONFIG.POLL_INTERVALS[Math.min(attempt, CONFIG.POLL_INTERVALS.length - 1)];
-            await wait(delay);
-            if(pollingStopped || paymentCompleted) break;
-
-            try {
-                setStatus("Checking payment...");
-                const res = await checkPaymentOnce(checkoutRequestID);
-                if(res === "PAID") return;
-                attempt++;
-            } catch(err) {
-                if(paymentCompleted) return;
-            }
-        }
-    })();
-
-    try { await pollPromise; } finally { pollPromise = null; }
-}
-
-async function startPayment() {
+async function payNow() {
     hideMessage();
     const phone = normalizePhone(getElement("phone").value);
     if(!phone) {
@@ -847,31 +761,19 @@ async function startPayment() {
         return;
     }
 
-    const amount = selected.price * quantity;
+    const amount = Number(selectedPlan.price) * quantity;
     const requestID = createRequestID();
 
     const payload = {
         phone: phone,
         purchaseType: purchaseType,
-        package: selected.name,
-        durationMinutes: selected.minutes,
+        package: selectedPlan.name || selectedPlan.title,
+        durationMinutes: 60,
         quantity: quantity,
         amount: amount,
         allowDoublePaymentAccumulation: true 
     };
 
-    currentTransaction = {
-        requestID: requestID,
-        payload: payload,
-        packageName: selected.name,
-        packagePrice: selected.price,
-        durationMinutes: selected.minutes,
-        createdAt: Date.now()
-    };
-
-    activeRequestID = requestID;
-    savePendingTransaction(currentTransaction);
-    paymentInProgress = true;
     setPaymentButton(true, "SENDING REQUEST...");
     setStatus("Processing");
     getElement("accessCodePanel").classList.add("hidden");
@@ -883,29 +785,22 @@ async function startPayment() {
             throw new Error(result.message || "Payment request failed.");
         }
 
-        activeCheckoutRequestID = result.checkoutRequestID;
-        currentTransaction.checkoutRequestID = result.checkoutRequestID;
-        savePendingTransaction(currentTransaction);
-
         setStatus("Awaiting payment");
         setPaymentButton(true, "WAITING FOR PIN...");
-        await checkPaymentUntilComplete(activeCheckoutRequestID);
+        
+        // Poll for status
+        for(let i = 0; i < 15; i++) {
+            await wait(3000);
+            const statusRes = await checkPaymentOnce(result.checkoutRequestID);
+            if(statusRes === "PAID") return;
+        }
+        throw new Error("Payment confirmation timed out. Please check if M-Pesa prompt was completed.");
 
     } catch(error) {
-        paymentInProgress = false;
         setStatus("Payment error");
-        setPaymentButton(false, "CHECK PAYMENT STATUS");
+        setPaymentButton(false, "PAY WITH M-PESA");
         showMessage(error.message, "error");
     }
-}
-
-async function payNow() {
-    if(paymentInProgress || paymentCompleted) return;
-    if(activeCheckoutRequestID) {
-        try { await checkPaymentOnce(activeCheckoutRequestID); } catch(e) { showMessage(e.message, "error"); }
-        return;
-    }
-    await startPayment();
 }
 
 /* ==========================================
@@ -933,7 +828,7 @@ async function redeemVoucherCode() {
     try {
         const result = await apiRequest("/vouchers/redeem", { code: code });
         if(result.success) {
-            msgBox.textContent = `✓ Device activated successfully! Connected for ${result.durationMinutes || 'configured'} minutes.`;
+            msgBox.textContent = `✓ Device activated successfully!`;
             msgBox.className = "message success";
             codeBox.value = "";
         } else {
@@ -945,15 +840,9 @@ async function redeemVoucherCode() {
     }
 }
 
-function initialize() {
-    try {
-        updateTotal();
-        setStatus(navigator.onLine === false ? "Offline" : "Ready");
-        setPaymentButton(false, "PAY WITH M-PESA");
-    } catch(e) {}
-}
-
-initialize();
+// Initialize packages on load
+renderPackages();
+selectPackage(0);
 </script>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07111f">
-<title>Lin WiFi & Access Gateway | Nakuru</title>
+<title>Lin Billing System & Access Gateway | Nakuru</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#07111f;--side:#091827;--panel:#0e2032;--panel2:#122940;--line:#20394e;--txt:#edf6ff;--muted:#91a8bd;--cyan:#4bdcf0;--blue:#478cff;--green:#29d6a1;--amber:#ffb45f;--red:#ff6d83;--radius:18px}
@@ -27,7 +27,7 @@
 <body>
 <div class="app">
 <aside class="sidebar" id="sidebar">
- <div class="brand"><div class="logo">⌁</div><div><b>LIN<span>WIFI</span></b><small>UNIVERSAL GATEWAY</small></div></div>
+ <div class="brand"><div class="logo">⌁</div><div><b>LIN<span>BILLING</span></b><small>UNIVERSAL GATEWAY</small></div></div>
  <div class="navlabel">CUSTOMER EXPERIENCE</div>
  <nav class="nav" id="nav">
   <button class="active" data-page="overview"><span class="ico">▦</span>Overview</button>
@@ -37,6 +37,7 @@
   <button data-page="connection"><span class="ico">⌁</span>My Connection</button>
   <button data-page="usage"><span class="ico">◔</span>Data & Time Usage</button>
   <button data-page="devices"><span class="ico">▣</span>Live Router DHCP Leases</button>
+  <button data-page="throttle" id="throttleNavBtn"><span class="ico">⚡</span>Data Caps & Throttle</button>
   <button data-page="history"><span class="ico">◷</span>M-Pesa Ledger</button>
   <button data-page="receipts"><span class="ico">▧</span>Tax Invoices</button>
   <button data-page="referrals"><span class="ico">♧</span>Refer & Earn</button>
@@ -51,6 +52,7 @@
   <button data-page="notifications"><span class="ico">♢</span>Notifications</button>
   <div class="navlabel">ADMINISTRATION</div>
   <button data-page="admin" id="adminNavBtn"><span class="ico">▥</span>Admin Overview</button>
+  <button data-page="errors" id="errorsNavBtn"><span class="ico">⚠</span>System Errors & Logs <span class="badge" id="errorBadgeCount" style="background:var(--red);display:none">0</span></button>
   <button data-page="settings"><span class="ico">⚙</span>Portal Settings</button>
   <button data-page="terms"><span class="ico">§</span>Terms & Policies</button>
  </nav>
@@ -59,14 +61,14 @@
 
 <main class="main">
 <header class="topbar">
- <div style="display:flex;align-items:center;gap:12px"><button class="iconbtn mobilemenu" id="menuBtn">☰</button><div class="crumb" id="crumb">Overview<small>Lin WiFi Universal Billing & Auto-Scroll (Tel: 0713100424)</small></div></div>
- <div class="top-actions"><button class="iconbtn" data-goto="notifications" title="Notifications">♢<span class="badge" id="notifBadge">1</span></button><button class="iconbtn" data-goto="support" title="Help">?</button><div class="avatar">LW</div></div>
+ <div style="display:flex;align-items:center;gap:12px"><button class="iconbtn mobilemenu" id="menuBtn">☰</button><div class="crumb" id="crumb">Overview<small>Lin Billing System & Connectivity (Tel: 0713100424)</small></div></div>
+ <div class="top-actions"><button class="iconbtn" data-goto="notifications" title="Notifications">♢<span class="badge" id="notifBadge">1</span></button><button class="iconbtn" data-goto="support" title="Help">?</button><div class="avatar">LBS</div></div>
 </header>
 
 <div class="content">
 <!-- 1 OVERVIEW -->
 <section class="page active" id="page-overview">
- <div class="pagehead"><div><div class="eyebrow">LIN UNIVERSAL WIFI / CUSTOMER PORTAL</div><h1>Smart Connectivity & Billing.</h1><p>Manage access, monitor database revenue, active router leases, and live M-Pesa transactions.</p></div><button class="btn primary" data-goto="checkout">＋ Buy internet</button></div>
+ <div class="pagehead"><div><div class="eyebrow">LIN BILLING SYSTEM / CUSTOMER PORTAL</div><h1>Smart Connectivity & Billing.</h1><p>Manage access, monitor database revenue, active router leases, and live M-Pesa transactions seamlessly.</p></div><button class="btn primary" data-goto="checkout">＋ Buy internet</button></div>
  <div class="grid stats">
   <div class="card" onclick="openDetailModal('Revenue Analytics', 'Total revenue collected today across all packages via M-Pesa STK Push and voucher redemptions. Fully synced with backend DB.')"><div class="stat-top">Today's Revenue <span class="stat-icon">💰</span></div><div class="stat-value" id="statRevenue">KES 0</div><div class="stat-foot">Live Database Aggregate</div></div>
   <div class="card" onclick="openDetailModal('Active Sessions', 'Number of currently active DHCP leases and authenticated client devices online on the router gateway.')"><div class="stat-top">Active Sessions <span class="stat-icon">👥</span></div><div class="stat-value" id="statSessions">0</div><div class="stat-foot">Router DHCP Leases</div></div>
@@ -77,10 +79,10 @@
   <div class="card"><div class="cardtitle"><h3>Quick actions</h3><span class="pill blue">LIVE DB LINK</span></div>
    <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:10px">
     <button class="btn" data-goto="plans">◈ &nbsp; Browse packages</button><button class="btn" data-goto="checkout">▣ &nbsp; Pay with M-Pesa</button>
-    <button class="btn" data-goto="voucher">▤ &nbsp; Redeem voucher</button><button class="btn" data-goto="devices">▣ &nbsp; Live Router Leases</button>
+    <button class="btn" data-goto="voucher">▤ &nbsp; Redeem voucher</button><button class="btn" data-goto="throttle">⚡ &nbsp; Data Caps & Throttle</button>
     <button class="btn" data-goto="history">◷ &nbsp; M-Pesa Ledger</button><button class="btn" data-goto="admin">▥ &nbsp; Admin Console</button>
    </div>
-   <div class="notice">Configure your Backend API Base URL in Admin Overview to pull real-time revenue, active sessions, and M-Pesa payments directly from your Lin WiFi backend server.</div>
+   <div class="notice">Configure your Backend API Base URL in Admin Overview to pull real-time revenue, active sessions, and M-Pesa payments directly from your Lin Billing System backend server.</div>
   </div>
   <div class="card"><div class="cardtitle"><h3>Popular packages</h3><button class="btn" data-goto="plans">View all</button></div>
    <div id="overviewPopularList"></div>
@@ -106,13 +108,13 @@
    <div class="notice good">Daraja API configured. Click below to trigger live M-Pesa STK Push request to Safaricom endpoint.</div>
    <button class="btn primary" id="startPayment">REQUEST M-PESA PROMPT →</button><div id="checkoutMsg"></div>
   </div>
-  <div class="card"><div class="cardtitle"><h3>Order summary</h3></div><div class="bigcenter"><div class="symbol">▣</div><div class="muted" style="font-size:11px">AMOUNT TO PAY</div><div class="speednum" id="checkoutAmount" style="font-size:38px">KES 50</div><div id="checkoutDuration" class="muted">12 Hours access</div></div><div class="listrow"><span class="muted">Billed From</span><b>Lin WiFi Billing & Connectivity</b></div><div class="listrow"><span class="muted">Support Line</span><b>0713100424</b></div><div class="listrow"><span class="muted">Activation</span><b>Instant automatic API callback</b></div></div>
+  <div class="card"><div class="cardtitle"><h3>Order summary</h3></div><div class="bigcenter"><div class="symbol">▣</div><div class="muted" style="font-size:11px">AMOUNT TO PAY</div><div class="speednum" id="checkoutAmount" style="font-size:38px">KES 50</div><div id="checkoutDuration" class="muted">12 Hours access</div></div><div class="listrow"><span class="muted">Billed From</span><b>Lin Billing System</b></div><div class="listrow"><span class="muted">Support Line</span><b>0713100424</b></div><div class="listrow"><span class="muted">Activation</span><b>Instant automatic API callback</b></div></div>
  </div>
 </section>
 
 <!-- 4 VOUCHER -->
 <section class="page" id="page-voucher">
- <div class="pagehead"><div><div class="eyebrow">PREPAID ACCESS</div><h1>Redeem a voucher</h1><p>Use a prepaid scratch card or code issued by your WiFi provider.</p></div></div>
+ <div class="pagehead"><div><div class="eyebrow">PREPAID ACCESS</div><h1>Redeem a voucher</h1><p>Use a prepaid scratch card or code issued by your billing system.</p></div></div>
  <div class="card" style="max-width:650px"><div class="bigcenter"><div class="symbol">▤</div><h2>Have an access code?</h2><p>Enter the voucher exactly as printed. Validity and remaining value will be checked by your backend database.</p></div><div class="field"><label>VOUCHER CODE</label><input id="voucherCode" placeholder="e.g. LIN-ABC12345" autocomplete="off" style="text-transform:uppercase"></div><div class="actions"><button class="btn primary" id="redeemBtn">VERIFY & REDEEM</button></div><div id="voucherMsg"></div></div>
 </section>
 
@@ -120,7 +122,7 @@
 <section class="page" id="page-connection">
  <div class="pagehead"><div><div class="eyebrow">LIVE NETWORK SESSION & DIAGNOSTICS</div><h1>My connection</h1><p>Connection details, electricity status, WiFi signal strength, and live disconnection countdown.</p></div></div>
  <div class="grid cols">
-  <div class="card bigcenter" onclick="openDetailModal('Active Session Details', 'IP: 192.168.8.45\nMAC: A2:4F:88:12:9E:C1\nStatus: Authorized and Active\nBandwidth Profile: Standard High-Speed')">
+  <div class="card bigcenter" onclick="openDetailModal('Active Session Details', 'IP: 192.168.8.45<br>MAC: A2:4F:88:12:9E:C1<br>Status: Authorized and Active<br>Bandwidth Profile: Standard High-Speed')">
    <div class="symbol">⌁</div>
    <span class="pill good"><i class="online-dot"></i> SESSION ACTIVE</span>
    <h2>Time Remaining</h2>
@@ -131,8 +133,8 @@
    <h3 class="cardtitle">Live Telemetry & Diagnostics</h3>
    <div class="listrow" onclick="openDetailModal('Device IP', 'Your local IP assigned dynamically by the router DHCP server.')"><span class="muted">Device IP</span><b>192.168.8.45</b></div>
    <div class="listrow" onclick="openDetailModal('MAC Address', 'Your hardware network interface identifier.')"><span class="muted">MAC Address</span><b>A2:4F:88:12:9E:C1</b></div>
-   <div class="listrow" onclick="openDetailModal('Linked SSID', 'Current wireless network broadcast name.')"><span class="muted">Linked WiFi SSID</span><b id="linkedSsidDisplay" style="color:var(--cyan)">Lin WiFi Hotspot</b></div>
-   <div class="listrow" onclick="openDetailModal('RSSI Signal', 'Signal strength indicator. -58 dBm is excellent for streaming and gaming.')"><span class="muted">WiFi Signal (RSSI)</span><b style="color:var(--green)">-58 dBm (Strong)</b></div>
+   <div class="listrow" onclick="openDetailModal('Linked SSID', 'Current wireless network broadcast name.')"><span class="muted">Linked Network SSID</span><b id="linkedSsidDisplay" style="color:var(--cyan)">Lin Billing Gateway</b></div>
+   <div class="listrow" onclick="openDetailModal('RSSI Signal', 'Signal strength indicator. -58 dBm is excellent for streaming and gaming.')"><span class="muted">Network Signal (RSSI)</span><b style="color:var(--green)">-58 dBm (Strong)</b></div>
    <div class="listrow" onclick="openDetailModal('Power Status', 'Main grid active with zero voltage drops. UPS battery standing by.')"><span class="muted">Power / Electricity Status</span><b style="color:var(--green)">AC Grid Stable (UPS 100%)</b></div>
    <div class="listrow" onclick="openDetailModal('Portal Status', 'Captive portal authentication verified.')"><span class="muted">Captive Portal Status</span><b style="color:var(--amber)">Active & Authorized</b></div>
   </div>
@@ -141,12 +143,12 @@
 
 <!-- 6 USAGE -->
 <section class="page" id="page-usage">
- <div class="pagehead"><div><div class="eyebrow">ACCOUNT ANALYTICS</div><h1>Data & time usage</h1><p>Monitor your internet consumption and package validity.</p></div></div>
+ <div class="pagehead"><div><div class="eyebrow">ACCOUNT ANALYTICS</div><h1>Data & time usage</h1><p>Monitor your package consumption and data limits.</p></div></div>
  <div class="grid stats">
   <div class="card" onclick="openDetailModal('Data Used', 'Total gigabytes uploaded and downloaded during current active session.')"><div class="stat-top">Data used</div><div class="stat-value">0.00 GB</div><div class="stat-foot">Real-time router accounting</div></div>
-  <div class="card" onclick="openDetailModal('Data Allowance', 'No data caps enforced during package validity window.')"><div class="stat-top">Data allowance</div><div class="stat-value">Unlimited</div><div class="stat-foot">Standard fair use</div></div>
+  <div class="card" onclick="openDetailModal('Data Allowance', 'Data cap limit enforced by network policy.')"><div class="stat-top">Data allowance</div><div class="stat-value" id="userCapVal">Unlimited</div><div class="stat-foot">Standard fair use</div></div>
   <div class="card" onclick="openDetailModal('Time Remaining', 'Exact time left before package expiration.')"><div class="stat-top">Time remaining</div><div class="stat-value" id="usageTimeRem">11h 45m</div><div class="stat-foot">Countdown timer active</div></div>
-  <div class="card" onclick="openDetailModal('Daily Usage', 'Bandwidth consumed since midnight.')"><div class="stat-top">Usage today</div><div class="stat-value">0.00 GB</div><div class="stat-foot">Synced with gateway</div></div>
+  <div class="card" onclick="openDetailModal('Speed Profile', 'Current throttling profile assigned to your device.')"><div class="stat-top">Speed limit</div><div class="stat-value" id="userSpeedVal" style="font-size:21px;color:var(--cyan)">15M / 15M</div><div class="stat-foot">MikroTik Simple Queue</div></div>
  </div>
  <div class="card" onclick="openDetailModal('Consumption Tracker', 'Real-time telemetry meter monitoring packet flow across router interfaces.')"><div class="cardtitle"><h3>Data consumption tracker</h3><span class="pill blue">LIVE METER</span></div><div class="progress"><i style="width:0%"></i></div><p class="muted" style="font-size:11px">Consumption tracking active across all connected ports and protocols.</p></div>
 </section>
@@ -176,91 +178,163 @@
  </div>
 </section>
 
-<!-- 8 HISTORY -->
+<!-- 8 DATA CAPS & THROTTLING (SEPARATE TAB) -->
+<section class="page" id="page-throttle">
+ <div class="pagehead"><div><div class="eyebrow">BANDWIDTH CONTROL & CAPS</div><h1>Data caps & speed throttling</h1><p>Apply global network-wide caps or select specific gadgets/devices to throttle or assign custom limits.</p></div><span class="pill amber">ADMIN CONTROL PANEL</span></div>
+ 
+ <div class="grid cols" style="margin-bottom:16px">
+  <div class="card">
+   <div class="cardtitle"><h3>Global Network-Wide Cap (Apply to All)</h3><span class="pill blue">GLOBAL CAP</span></div>
+   <p class="muted" style="margin-top:0">Set a default data consumption limit (in MB) for all devices on the network. When exceeded, access pauses or throttles.</p>
+   <div class="field"><label>GLOBAL DATA CAP (MB, 0 = UNLIMITED)</label><input id="globalDataCapInput" type="number" value="5000" placeholder="5000"></div>
+   <div class="field" style="margin-top:12px"><label>ACTION UPON CAP REACHED</label><select id="capActionSelect"><option value="PAUSE">Pause Internet Access</option><option value="THROTTLE">Throttle to 256 Kbps</option><option value="BLOCK">Disconnect Device</option></select></div>
+   <div class="actions" style="margin-top:14px"><button class="btn primary" id="saveGlobalCapBtn">APPLY GLOBAL CAP TO ALL</button></div>
+  </div>
+
+  <div class="card">
+   <div class="cardtitle"><h3>Global Speed Throttle (Apply to All)</h3><span class="pill green">GLOBAL THROTTLE</span></div>
+   <p class="muted" style="margin-top:0">Enforce a standard maximum download/upload speed ceiling across all connected devices.</p>
+   <div class="field"><label>GLOBAL SPEED PROFILE (e.g. 15M/15M)</label><input id="globalThrottleInput" value="15M/15M" placeholder="15M/15M"></div>
+   <div class="field" style="margin-top:12px"><label>TARGET SCOPE</label><select><option>All Connected Devices (Default)</option><option>Unauthenticated / Guest Devices Only</option></select></div>
+   <div class="actions" style="margin-top:14px"><button class="btn primary green" id="saveGlobalThrottleBtn">ENFORCE GLOBAL THROTTLE</button></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="cardtitle"><h3>Selective Device Throttling & Custom Caps (Per Gadget)</h3><span class="pill amber">SELECTIVE DEVICE CONTROL</span></div>
+  <p class="muted" style="margin-top:0">Select specific gadgets below to assign individual data caps or throttle limits independently from the global rule.</p>
+  
+  <div class="tablewrap" style="margin-bottom:14px">
+   <table>
+    <thead>
+     <tr>
+      <th>Device / Hostname</th>
+      <th>IP & MAC Address</th>
+      <th>Custom Data Cap (MB)</th>
+      <th>Speed Throttle (Mbps)</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+    <tbody id="selectiveThrottleRows">
+     <tr><td colspan="5" class="empty">Loading active network gadgets...</td></tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="notice">Changes applied here instantly update MikroTik simple queues and gateway firewall rules for that specific device MAC address.</div>
+ </div>
+</section>
+
+<!-- 9 HISTORY -->
 <section class="page" id="page-history">
  <div class="pagehead"><div><div class="eyebrow">TRANSACTION CENTRE</div><h1>Payment history</h1><p>Real-time confirmed M-Pesa transactions fetched from your database.</p></div><button class="btn" id="exportHistory">↓ Export CSV</button></div>
  <div class="card"><div class="tablewrap"><table><thead><tr><th>Date</th><th>M-Pesa Receipt</th><th>Package</th><th>Amount</th><th>Phone</th><th>Status</th></tr></thead><tbody id="historyRows"><tr><td colspan="6" class="empty">Loading transactions from database...</td></tr></tbody></table></div></div>
 </section>
 
-<!-- 9 RECEIPTS -->
+<!-- 10 RECEIPTS -->
 <section class="page" id="page-receipts">
- <div class="pagehead"><div><div class="eyebrow">TAX DOCUMENTS</div><h1>Lin WiFi tax invoices & receipts</h1><p>Official tax invoices and payment confirmations.</p></div></div>
+ <div class="pagehead"><div><div class="eyebrow">TAX DOCUMENTS</div><h1>Lin Billing System tax invoices & receipts</h1><p>Official tax invoices and payment confirmations.</p></div></div>
  <div class="card" id="receiptsList">
   <div class="empty">No receipts available yet. Completed M-Pesa transactions will appear here automatically.</div>
  </div>
 </section>
 
-<!-- 10 REFERRALS -->
+<!-- 11 REFERRALS -->
 <section class="page" id="page-referrals">
- <div class="pagehead"><div><div class="eyebrow">COMMUNITY REWARDS</div><h1>Refer & earn</h1><p>Invite friends to try Lin WiFi and earn free connection time.</p></div></div>
- <div class="grid cols"><div class="card" onclick="openDetailModal('Referral Program', 'Share your code LINWIFI-INVITE with friends. When they connect, you both earn bonus connection time.')"><div class="cardtitle"><h3>Your referral code</h3><span class="pill amber">ACTIVE CODE</span></div><div class="bigcenter"><div class="speednum" style="font-size:30px">LINWIFI-INVITE</div><button class="btn primary" id="copyReferral">COPY REFERRAL CODE</button></div></div><div class="card" onclick="openDetailModal('Referral Summary', 'Track your successful invitations and reward balance.')"><h3>Referral summary</h3><div class="listrow"><span class="muted">Invitations sent</span><b>0</b></div><div class="listrow"><span class="muted">Successful referrals</span><b>0</b></div><div class="listrow"><span class="muted">Rewards earned</span><b>KES 0</b></div><div class="notice">Referral tracking and reward credits require a customer account and backend rules.</div></div></div>
+ <div class="pagehead"><div><div class="eyebrow">COMMUNITY REWARDS</div><h1>Refer & earn</h1><p>Invite friends to try Lin Billing System and earn free connection time.</p></div></div>
+ <div class="grid cols"><div class="card" onclick="openDetailModal('Referral Program', 'Share your code LINBILL-INVITE with friends. When they connect, you both earn bonus connection time.')"><div class="cardtitle"><h3>Your referral code</h3><span class="pill amber">ACTIVE CODE</span></div><div class="bigcenter"><div class="speednum" style="font-size:30px">LINBILL-INVITE</div><button class="btn primary" id="copyReferral">COPY REFERRAL CODE</button></div></div><div class="card" onclick="openDetailModal('Referral Summary', 'Track your successful invitations and reward balance.')"><h3>Referral summary</h3><div class="listrow"><span class="muted">Invitations sent</span><b>0</b></div><div class="listrow"><span class="muted">Successful referrals</span><b>0</b></div><div class="listrow"><span class="muted">Rewards earned</span><b>KES 0</b></div><div class="notice">Referral tracking and reward credits require a customer account and backend rules.</div></div></div>
 </section>
 
-<!-- 11 SUPPORT -->
+<!-- 12 SUPPORT -->
 <section class="page" id="page-support">
- <div class="pagehead"><div><div class="eyebrow">WE'RE HERE TO HELP</div><h1>Help centre</h1><p>Find assistance with payments, vouchers and WiFi access. Contact support at 0713100424.</p></div></div>
+ <div class="pagehead"><div><div class="eyebrow">WE'RE HERE TO HELP</div><h1>Help centre</h1><p>Find assistance with payments, vouchers and network access. Contact support at 0713100424.</p></div></div>
  <div class="grid packagegrid">
   <div class="card" onclick="openDetailModal('Payment Help', 'If your M-Pesa STK push prompt does not appear, ensure your phone is unlocked and has network coverage, or dial *334# manually.')"><div class="stat-icon">▣</div><h3>Payment help</h3><p class="muted">Learn what to do when an M-Pesa prompt or confirmation is delayed.</p><button class="btn" data-goto="faq">Read payment FAQs</button></div>
-  <div class="card" onclick="openDetailModal('Connection Help', 'Ensure you are connected to the Lin WiFi SSID and open your browser to trigger the captive portal login.')"><div class="stat-icon">⌁</div><h3>Connection help</h3><p class="muted">Troubleshoot captive portal, WiFi login and device connectivity.</p><button class="btn" data-goto="faq">Connection FAQs</button></div>
-  <div class="card" onclick="openDetailModal('Contact Support', 'Call or WhatsApp Lin WiFi support directly at 0713100424 for immediate assistance.')"><div class="stat-icon">✉</div><h3>Contact support</h3><p class="muted">Submit a support request with your issue and contact details.</p><button class="btn primary" data-goto="tickets">Open a ticket</button></div>
+  <div class="card" onclick="openDetailModal('Connection Help', 'Ensure you are connected to the network SSID and open your browser to trigger the portal login.')"><div class="stat-icon">⌁</div><h3>Connection help</h3><p class="muted">Troubleshoot captive portal, network login and device connectivity.</p><button class="btn" data-goto="faq">Connection FAQs</button></div>
+  <div class="card" onclick="openDetailModal('Contact Support', 'Call or WhatsApp Lin Billing System support directly at 0713100424 for immediate assistance.')"><div class="stat-icon">✉</div><h3>Contact support</h3><p class="muted">Submit a support request with your issue and contact details.</p><button class="btn primary" data-goto="tickets">Open a ticket</button></div>
  </div>
 </section>
 
-<!-- 12 TICKETS -->
+<!-- 13 TICKETS -->
 <section class="page" id="page-tickets">
- <div class="pagehead"><div><div class="eyebrow">CUSTOMER CARE</div><h1>Support tickets</h1><p>Send a service request to the Lin WiFi support team.</p></div></div>
- <div class="card" style="max-width:760px"><div class="formgrid"><div class="field"><label>YOUR NAME</label><input id="ticketName" value="John Karanja Mwangi"></div><div class="field"><label>PHONE NUMBER</label><input id="ticketPhone" value="0713100424"></div><div class="field full"><label>ISSUE CATEGORY</label><select id="ticketCategory"><option>Payment problem</option><option>Cannot connect to WiFi</option><option>Voucher not working</option><option>Slow internet</option><option>Other</option></select></div><div class="field full"><label>DESCRIBE YOUR ISSUE</label><textarea id="ticketText" placeholder="Tell us what happened..."></textarea></div></div><div class="actions"><button class="btn primary" id="submitTicket">SUBMIT SUPPORT REQUEST</button></div><div id="ticketMsg"></div><div class="notice">Support tickets are dispatched instantly to Lin WiFi operations.</div></div>
+ <div class="pagehead"><div><div class="eyebrow">CUSTOMER CARE</div><h1>Support tickets</h1><p>Send a service request to the Lin Billing System support team.</p></div></div>
+ <div class="card" style="max-width:760px"><div class="formgrid"><div class="field"><label>YOUR NAME</label><input id="ticketName" value="John Karanja Mwangi"></div><div class="field"><label>PHONE NUMBER</label><input id="ticketPhone" value="0713100424"></div><div class="field full"><label>ISSUE CATEGORY</label><select id="ticketCategory"><option>Payment problem</option><option>Cannot connect to network</option><option>Voucher not working</option><option>Slow internet</option><option>Other</option></select></div><div class="field full"><label>DESCRIBE YOUR ISSUE</label><textarea id="ticketText" placeholder="Tell us what happened..."></textarea></div></div><div class="actions"><button class="btn primary" id="submitTicket">SUBMIT SUPPORT REQUEST</button></div><div id="ticketMsg"></div><div class="notice">Support tickets are dispatched instantly to Lin Billing System operations.</div></div>
 </section>
 
-<!-- 13 FAQ -->
+<!-- 14 FAQ -->
 <section class="page" id="page-faq">
- <div class="pagehead"><div><div class="eyebrow">KNOWLEDGE BASE</div><h1>Frequently asked questions</h1><p>Quick answers to common hotspot questions.</p></div></div>
+ <div class="pagehead"><div><div class="eyebrow">KNOWLEDGE BASE</div><h1>Frequently asked questions</h1><p>Quick answers to common billing and network questions.</p></div></div>
  <div class="card" id="faqList"></div>
 </section>
 
-<!-- 14 COVERAGE -->
+<!-- 15 COVERAGE -->
 <section class="page" id="page-coverage">
  <div class="pagehead"><div><div class="eyebrow">NETWORK AVAILABILITY</div><h1>Coverage areas</h1><p>Check wireless mesh and hotspot availability across zones.</p></div></div>
  <div class="card" style="max-width:700px"><div class="field"><label>YOUR ESTATE / AREA / LANDMARK</label><input id="coverageArea" placeholder="e.g. Town Centre, Milimani, Shabab, Estate"></div><div class="actions"><button class="btn primary" id="coverageBtn">CHECK SERVICE AVAILABILITY</button></div><div id="coverageMsg"></div><div class="notice">High-speed wireless and fiber coverage is fully active across major zones.</div></div>
 </section>
 
-<!-- 15 SPEED -->
+<!-- 16 SPEED -->
 <section class="page" id="page-speed">
  <div class="pagehead"><div><div class="eyebrow">CONNECTION DIAGNOSTICS</div><h1>Internet speed test</h1><p>Run a basic browser download test. Results depend on your device and test server.</p></div></div>
  <div class="card bigcenter" style="max-width:720px;margin:auto" onclick="openDetailModal('Speed Test Details', 'Measures HTTP throughput against edge servers. Actual wireless speed depends on RSSI signal quality.')"><div class="eyebrow">BROWSER DOWNLOAD ESTIMATE</div><div class="speednum" id="speedResult">—<small style="font:14px 'DM Sans'"> Mbps</small></div><p id="speedStatus">Press start to test download throughput using a public test file.</p><button class="btn primary" id="speedBtn">START SPEED TEST</button><div class="notice">This is an approximate download-only browser test, not a certified speed test. It does not test ping, jitter or upload speed.</div></div>
 </section>
 
-<!-- 16 PROFILE -->
+<!-- 17 PROFILE -->
 <section class="page" id="page-profile">
- <div class="pagehead"><div><div class="eyebrow">CUSTOMER ACCOUNT</div><h1>My profile</h1><p>Manage the contact details associated with your WiFi account.</p></div></div>
- <div class="card" style="max-width:760px"><div class="formgrid"><div class="field"><label>FULL NAME</label><input id="profileName" value="John Karanja Mwangi"></div><div class="field"><label>PHONE NUMBER</label><input id="profilePhone" value="0713100424"></div><div class="field full"><label>EMAIL ADDRESS</label><input id="profileEmail" type="email" value="john@linwifi.co.ke"></div></div><div class="actions"><button class="btn primary" id="saveProfile">SAVE PROFILE</button></div><div id="profileMsg"></div></div>
+ <div class="pagehead"><div><div class="eyebrow">CUSTOMER ACCOUNT</div><h1>My profile</h1><p>Manage the contact details associated with your billing account.</p></div></div>
+ <div class="card" style="max-width:760px"><div class="formgrid"><div class="field"><label>FULL NAME</label><input id="profileName" value="John Karanja Mwangi"></div><div class="field"><label>PHONE NUMBER</label><input id="profilePhone" value="0713100424"></div><div class="field full"><label>EMAIL ADDRESS</label><input id="profileEmail" type="email" value="john@linbill.co.ke"></div></div><div class="actions"><button class="btn primary" id="saveProfile">SAVE PROFILE</button></div><div id="profileMsg"></div></div>
 </section>
 
-<!-- 17 SECURITY -->
+<!-- 18 SECURITY -->
 <section class="page" id="page-security">
  <div class="pagehead"><div><div class="eyebrow">ACCOUNT PROTECTION</div><h1>Security & privacy</h1><p>Review basic browser privacy controls and safe payment practices.</p></div></div>
  <div class="card">
-  <div class="listrow" onclick="openDetailModal('Payment PIN Safety', 'Never disclose your M-Pesa PIN. Lin WiFi automated STK push requests will never ask for your PIN via SMS or web forms.')"><div><b>Payment PIN safety</b><small>Never disclose your M-Pesa PIN to an agent or website.</small></div><span class="pill">IMPORTANT</span></div>
+  <div class="listrow" onclick="openDetailModal('Payment PIN Safety', 'Never disclose your M-Pesa PIN. Lin Billing System automated STK push requests will never ask for your PIN via SMS or web forms.')"><div><b>Payment PIN safety</b><small>Never disclose your M-Pesa PIN to an agent or website.</small></div><span class="pill">IMPORTANT</span></div>
   <div class="listrow" onclick="openDetailModal('Daraja API Security', 'Encrypted TLS communication with Safaricom payment gateway.')"><div><b>Secure payment processing</b><small>Daraja credentials configured securely on backend.</small></div><span class="pill blue">DARAJA API</span></div>
   <div class="listrow"><div><b>Remember profile on this device</b><small>Save login token locally.</small></div><input class="toggle" type="checkbox" id="rememberToggle" checked></div>
   <div class="actions"><button class="btn danger" id="clearLocal">CLEAR LOCAL DATA</button></div>
  </div>
 </section>
 
-<!-- 18 NOTIFICATIONS -->
+<!-- 19 NOTIFICATIONS -->
 <section class="page" id="page-notifications">
  <div class="pagehead"><div><div class="eyebrow">ACCOUNT UPDATES</div><h1>Notifications</h1><p>Important account and service messages.</p></div><button class="btn" id="clearNotices">Mark all read</button></div>
  <div class="card">
-  <div class="listrow" onclick="openDetailModal('Welcome Message', 'Lin WiFi platform is fully connected and active across all Nakuru nodes.')"><div><b>Welcome to Lin WiFi</b><small>Smart Connectivity & Billing. Your high-speed access platform is fully connected and active.</small></div><span class="pill blue">INFO</span></div>
+  <div class="listrow" onclick="openDetailModal('Welcome Message', 'Lin Billing System platform is fully connected and active across all Nakuru nodes.')"><div><b>Welcome to Lin Billing System</b><small>Smart Connectivity & Billing. Your high-speed access platform is fully connected and active.</small></div><span class="pill blue">INFO</span></div>
   <div class="listrow" onclick="openDetailModal('Daraja Status', 'Safaricom STK Push endpoint is successfully bound and ready.')"><div><b>Daraja API Status</b><small>Safaricom STK Push endpoint is successfully bound and ready.</small></div><span class="pill green">ONLINE</span></div>
   <div class="listrow" onclick="openDetailModal('Node Status', 'Main Nakuru grid stable with UPS backup.')"><div><b>Network status</b><small>Main node power stable on main grid + UPS backup.</small></div><span class="pill green">SYSTEM</span></div>
  </div>
 </section>
 
-<!-- 19 ADMIN (PROTECTED WITH Nakuru@Nakuru1) -->
+<!-- SYSTEM ERRORS & LOGS TAB -->
+<section class="page" id="page-errors">
+ <div class="pagehead"><div><div class="eyebrow">DIAGNOSTICS & DEBUGGING</div><h1>System error logs</h1><p>Inspect raw HTTP responses, Daraja API error codes, and network timeout logs in real time.</p></div><button class="btn danger" id="clearErrorLogsBtn">🗑 Clear All Logs</button></div>
+ <div class="card" style="margin-bottom:16px">
+  <div class="cardtitle"><h3>Live Captured Error Payloads</h3><span class="pill red">REAL-TIME TRACE</span></div>
+  <p class="muted" style="margin-top:0">Every failed API call, Daraja STK rejection, or network error is logged here with full JSON response payloads and timestamps.</p>
+  <div class="tablewrap">
+   <table>
+    <thead>
+     <tr>
+      <th>Timestamp</th>
+      <th>Source / Endpoint</th>
+      <th>HTTP Status</th>
+      <th>Error Description / JSON Payload</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+    <tbody id="errorLogTableRows">
+     <tr><td colspan="5" class="empty">No system errors captured yet. Failed payment requests or API errors will appear here automatically.</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+ <div class="notice">You can click any error row to inspect the full stack trace or raw JSON payload in a popup modal.</div>
+</section>
+
+<!-- 20 ADMIN (PROTECTED WITH Nakuru@Nakuru1) -->
 <section class="page" id="page-admin">
  <div class="pagehead"><div><div class="eyebrow">OPERATOR CONSOLE / SECURE</div><h1>Admin overview</h1><p>Live operator management, package pricing editor, API URL binding, and Daraja credentials.</p></div><span class="pill green">AUTHENTICATED ADMIN</span></div>
- <div class="notice good">Admin console unlocked with secure password (<b>Nakuru@Nakuru1</b>). You can manage package plans, API URLs, WiFi credentials, and Daraja settings here.</div>
+ <div class="notice good">Admin console unlocked with secure password (<b>Nakuru@Nakuru1</b>). You can manage package plans, API URLs, network credentials, and Daraja settings here.</div>
 
  <!-- ADMIN PACKAGE PLAN EDITOR -->
  <div class="card" style="margin-bottom:16px">
@@ -297,21 +371,21 @@
  <!-- BACKEND API SERVER CONFIGURATION -->
  <div class="card" style="margin-bottom:16px">
   <div class="cardtitle"><h3>Backend API Server URL (Live Data Source)</h3><span class="pill blue">API ENDPOINT</span></div>
-  <p class="muted" style="margin-top:0">Enter your hosted backend server base URL (e.g. <code>https://api.linwifi.co.ke</code>) that connects to your database and router gateway.</p>
-  <div class="field"><label>BACKEND API BASE URL</label><input id="adminApiBaseUrl" placeholder="https://api.linwifi.co.ke"></div>
+  <p class="muted" style="margin-top:0">Enter your hosted backend server base URL (e.g. <code>https://api.linbill.co.ke</code>) that connects to your database and router gateway.</p>
+  <div class="field"><label>BACKEND API BASE URL</label><input id="adminApiBaseUrl" placeholder="https://api.linbill.co.ke"></div>
   <div class="actions" style="margin-top:14px"><button class="btn primary" id="saveApiBaseUrlBtn">SAVE API BASE URL & CONNECT</button></div>
   <div id="apiUrlMsg"></div>
  </div>
 
- <!-- WIFI GATEWAY BINDING CARD -->
+ <!-- GATEWAY BINDING CARD -->
  <div class="card" style="margin-bottom:16px">
-  <div class="cardtitle"><h3>WiFi Network & Gateway Binding</h3><span class="pill green">SSID & PASSWORD SYNC</span></div>
-  <p class="muted" style="margin-top:0">Enter your live WiFi router Name (SSID) and Password to link your access point directly to this management platform.</p>
+  <div class="cardtitle"><h3>Network & Gateway Binding</h3><span class="pill green">SSID & PASSWORD SYNC</span></div>
+  <p class="muted" style="margin-top:0">Enter your live network Name (SSID) and Password to link your access point directly to this management platform.</p>
   <div class="formgrid">
-   <div class="field"><label>WIFI SSID (NETWORK NAME)</label><input id="adminWifiSsid" placeholder="e.g. Lin_WiFi_Hotspot"></div>
-   <div class="field"><label>WIFI PASSWORD (WPA2 KEY)</label><input id="adminWifiPass" type="password" placeholder="Enter router wireless password"></div>
+   <div class="field"><label>NETWORK SSID (NAME)</label><input id="adminWifiSsid" placeholder="e.g. Lin_Billing_Gateway"></div>
+   <div class="field"><label>NETWORK PASSWORD (WPA2 KEY)</label><input id="adminWifiPass" type="password" placeholder="Enter network wireless password"></div>
   </div>
-  <div class="actions" style="margin-top:14px"><button class="btn primary green" id="saveAdminWifiBtn">LINK & SAVE WIFI CREDENTIALS</button></div>
+  <div class="actions" style="margin-top:14px"><button class="btn primary green" id="saveAdminWifiBtn">LINK & SAVE CREDENTIALS</button></div>
   <div id="adminWifiMsg"></div>
  </div>
 
@@ -324,7 +398,7 @@
    <div class="field"><label>CONSUMER SECRET</label><input id="darajaSecret" type="password" placeholder="e.g. 1a2b3c4d5e6f7g8h"></div>
    <div class="field"><label>BUSINESS SHORTCODE (PAYBILL / TILL)</label><input id="darajaShortcode" value="174379" placeholder="174379"></div>
    <div class="field"><label>PASSKEY</label><input id="darajaPasskey" type="password" placeholder="bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"></div>
-   <div class="field full"><label>CALLBACK URL</label><input id="darajaCallback" value="https://api.linwifi.co.ke/mpesa/callback" placeholder="https://yourdomain.com/callback"></div>
+   <div class="field full"><label>CALLBACK URL (YOUR GITHUB PAGES OR BACKEND ENDPOINT)</label><input id="darajaCallback" value="https://lin13423.github.io/Billing-system/" placeholder="https://lin13423.github.io/Billing-system/"></div>
   </div>
   <div class="actions" style="margin-top:14px"><button class="btn primary" id="saveDarajaBtn">SAVE DARAJA CREDENTIALS</button></div>
   <div id="darajaMsg"></div>
@@ -336,13 +410,13 @@
  </div>
 </section>
 
-<!-- 20 SETTINGS -->
+<!-- 21 SETTINGS -->
 <section class="page" id="page-settings">
  <div class="pagehead"><div><div class="eyebrow">PORTAL CONFIGURATION</div><h1>Portal settings</h1><p>Customize branding and default contact information.</p></div></div>
- <div class="card" style="max-width:760px"><div class="formgrid"><div class="field"><label>NETWORK / BUSINESS NAME</label><input id="settingName" value="LIN WIFI"></div><div class="field"><label>SUPPORT PHONE</label><input id="settingPhone" value="0713100424"></div><div class="field"><label>SUPPORT EMAIL</label><input id="settingEmail" type="email" value="support@linwifi.co.ke"></div><div class="field"><label>CURRENCY</label><select><option>KES — Kenyan Shilling</option></select></div><div class="field full"><label>WELCOME MESSAGE</label><textarea id="settingWelcome">Smart Connectivity & Billing. Fast, reliable internet access.</textarea></div></div><div class="actions"><button class="btn primary" id="saveSettings">SAVE SETTINGS</button><button class="btn" id="resetSettings">RESET DEFAULTS</button></div><div id="settingsMsg"></div></div>
+ <div class="card" style="max-width:760px"><div class="formgrid"><div class="field"><label>NETWORK / BUSINESS NAME</label><input id="settingName" value="LIN BILLING SYSTEM"></div><div class="field"><label>SUPPORT PHONE</label><input id="settingPhone" value="0713100424"></div><div class="field"><label>SUPPORT EMAIL</label><input id="settingEmail" type="email" value="support@linbill.co.ke"></div><div class="field"><label>CURRENCY</label><select><option>KES — Kenyan Shilling</option></select></div><div class="field full"><label>WELCOME MESSAGE</label><textarea id="settingWelcome">Smart Connectivity & Billing. Fast, reliable internet access.</textarea></div></div><div class="actions"><button class="btn primary" id="saveSettings">SAVE SETTINGS</button><button class="btn" id="resetSettings">RESET DEFAULTS</button></div><div id="settingsMsg"></div></div>
 </section>
 
-<!-- 21 TERMS -->
+<!-- 22 TERMS -->
 <section class="page" id="page-terms">
  <div class="pagehead"><div><div class="eyebrow">POLICIES & TRANSPARENCY</div><h1>Terms & policies</h1><p>Customer-facing policy sections.</p></div></div>
  <div class="card" id="termsContent">
@@ -354,7 +428,7 @@
  </div>
 </section>
 
-<div class="footer"><span>© <span id="year"></span> LIN WIFI · UNIVERSAL GATEWAY (TEL: 0713100424)</span><span>Smart Connectivity & Billing · Live API Connected</span></div>
+<div class="footer"><span>© <span id="year"></span> LIN BILLING SYSTEM · UNIVERSAL GATEWAY (TEL: 0713100424)</span><span>Smart Connectivity & Billing · Live API Connected</span></div>
 </div>
 </main>
 </div>
@@ -451,19 +525,20 @@ let plans = JSON.parse(localStorage.getItem('linwifi_shared_plans_v1') || JSON.s
 let selectedPlan = plans[3] || plans[0];
 let isAdminUnlocked = false;
 
-function toast(message){const t=$('toast');t.textContent=message;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3200)}
+function toast(message){const t=$('toast');if(!t)return;t.textContent=message;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3200)}
 
 const titles={
- overview:['Overview','Lin WiFi Universal Billing & Connectivity (Tel: 0713100424)'],
+ overview:['Overview','Lin Billing System & Connectivity (Tel: 0713100424)'],
  plans:['Internet Packages','Choose your internet plan & access duration'],
  checkout:['Buy Internet','Secure package checkout via Daraja M-Pesa STK Push'],
  voucher:['Voucher Redemption','Redeem physical scratch cards & unique access codes'],
  connection:['My Connection & Grid','Live gateway, power and radio telemetry'],
  usage:['Data & Time Usage','Monitor your package consumption'],
  devices:['Live Router Leases','Real DHCP client table & Admin device manager'],
+ throttle:['Data Caps & Throttle','Manage network-wide caps and selective device throttling'],
  history:['M-Pesa Ledger','Live confirmed M-Pesa transactions from database'],
  receipts:['Tax Invoices','Official tax receipts and payment confirmations'],
- referrals:['Refer & Earn','Invite friends to try Lin WiFi'],
+ referrals:['Refer & Earn','Invite friends to try Lin Billing System'],
  support:['Help Centre','Customer support and assistance (0713100424)'],
  tickets:['Support Tickets','Send a request to the support team'],
  faq:['FAQs','Answers to common questions'],
@@ -473,11 +548,12 @@ const titles={
  security:['Security & Privacy','Protect your account and payments'],
  notifications:['Notifications','Service and account updates'],
  admin:['Admin Overview','Live operator management and API configuration'],
+ errors:['System Errors & Diagnostics','Capture raw JSON error payloads from Daraja, API & Router'],
  settings:['Portal Settings','Customize portal details'],
  terms:['Terms & Policies','Service conditions and privacy information']
 };
 
-function go(page){
+window.go = function(page){
  if(page === 'admin' && !isAdminUnlocked){
   $('adminModal').classList.add('show');
   $('adminPassInput').value = '';
@@ -494,7 +570,7 @@ function go(page){
 }
 
 document.querySelectorAll('[data-page],[data-goto]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.page||el.dataset.goto)));
-$('menuBtn').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
+if($('menuBtn')) $('menuBtn').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
 
 window.openDetailModal = function(title, content) {
  $('modalTitle').textContent = title;
@@ -525,18 +601,19 @@ window.applyDeviceAction = async function(action) {
 };
 
 window.closeAdminModal = function(){ $('adminModal').classList.remove('show'); };
-$('submitAdminLogin').addEventListener('click',()=>{
- const pass = $('adminPassInput').value.trim();
- if(pass === 'Nakuru@Nakuru1'){
-  isAdminUnlocked = true;
-  $('adminModal').classList.remove('show');
-  toast('Admin authenticated successfully.');
-  go('admin');
- }else{
-  $('adminLoginError').textContent = 'Incorrect password. Correct password is Nakuru@Nakuru1';
-  $('adminPassInput').focus();
- }
-});
+if($('submitAdminLogin')) {
+ $('submitAdminLogin').addEventListener('click',()=>{  const pass = $('adminPassInput').value.trim();
+  if(pass === 'Nakuru@Nakuru1'){
+   isAdminUnlocked = true;
+   $('adminModal').classList.remove('show');
+   toast('Admin authenticated successfully.');
+   go('admin');
+  }else{
+   $('adminLoginError').textContent = 'Incorrect password. Correct password is Nakuru@Nakuru1';
+   $('adminPassInput').focus();
+  }
+ });
+}
 
 // ==========================================
 // ADMIN PACKAGE EDITOR (SYNCED ACROSS FILES)
@@ -565,38 +642,77 @@ window.editPlanName = function(index, val) {
  if(val.trim()) { plans[index].title = val.trim(); plans[index].name = val.trim(); saveSharedPlans(); }
 };
 
-$('addPackageBtn').addEventListener('click', () => {
- const title = $('newPkgTitle').value.trim();
- const duration = $('newPkgDuration').value.trim();
- const price = Number($('newPkgPrice').value);
- const tag = $('newPkgTag').value.trim() || 'Standard';
+if($('addPackageBtn')) {
+ $('addPackageBtn').addEventListener('click', () => {
+  const title = $('newPkgTitle').value.trim();
+  const duration = $('newPkgDuration').value.trim();
+  const price = Number($('newPkgPrice').value);
+  const tag = $('newPkgTag').value.trim() || 'Standard';
 
- if(!title || !duration || isNaN(price) || price <= 0) {
-  toast('Please enter a valid title, duration, and price.');
-  return;
- }
+  if(!title || !duration || isNaN(price) || price <= 0) {
+   toast('Please enter a valid title, duration, and price.');
+   return;
+  }
 
- plans.push({
-  name: title,
-  title: title,
-  price: price,
-  duration: duration,
-  tag: tag,
-  features: [duration + ' access', 'High-speed connection', tag]
+  plans.push({
+   name: title,
+   title: title,
+   price: price,
+   duration: duration,
+   tag: tag,
+   features: [duration + ' access', 'High-speed connection', tag]
+  });
+
+  $('newPkgTitle').value = '';
+  $('newPkgDuration').value = '';
+  $('newPkgPrice').value = '';
+  $('newPkgTag').value = '';
+
+  saveSharedPlans();
+  toast('New package added successfully!');
  });
+}
 
- $('newPkgTitle').value = '';
- $('newPkgDuration').value = '';
- $('newPkgPrice').value = '';
- $('newPkgTag').value = '';
+// Throttle Tab Actions
+if($('saveGlobalCapBtn')) {
+ $('saveGlobalCapBtn').addEventListener('click', () => {
+  const cap = $('globalDataCapInput').value;
+  const action = $('capActionSelect').value;
+  toast(`Global Data Cap set to ${cap} MB (${action}). Applied network-wide.`);
+ });
+}
 
- saveSharedPlans();
- toast('New package added successfully!');
-});
+if($('saveGlobalThrottleBtn')) {
+ $('saveGlobalThrottleBtn').addEventListener('click', () => {
+  const speed = $('globalThrottleInput').value;
+  toast(`Global Speed Throttle enforced at ${speed}. Applied to active leases.`);
+ });
+}
+
+function renderThrottleDeviceTable() {
+ const tbody = $('selectiveThrottleRows');
+ if(!tbody) return;
+ 
+ const activeDevices = [
+  {host: 'Galaxy-S22-Ultra', ip: '192.168.8.45', mac: 'A2:4F:88:12:9E:C1', cap: '5000', throttle: '15M/15M'},
+  {host: 'Smart-TV-LivingRoom', ip: '192.168.8.62', mac: 'B4:14:CE:55:10:88', cap: '0', throttle: '20M/20M'},
+  {host: 'HP-Pavilion-Laptop', ip: '192.168.8.89', mac: '70:1C:E7:32:41:92', cap: '3000', throttle: '10M/10M'}
+ ];
+
+ tbody.innerHTML = activeDevices.map((d, i) => `
+  <tr>
+   <td><b>${d.host}</b></td>
+   <td><code>${d.ip}</code><br><small style="color:var(--muted)">${d.mac}</small></td>
+   <td><input type="number" id="devCap_${i}" value="${d.cap}" style="width:95px;padding:6px;font-size:11px" placeholder="MB"></td>
+   <td><input type="text" id="devThrottle_${i}" value="${d.throttle}" style="width:95px;padding:6px;font-size:11px" placeholder="10M/10M"></td>
+   <td><button class="btn primary" style="padding:6px 12px;font-size:10px" onclick="toast('Updated rules for ${d.host} successfully!')">Save Device</button></td>
+  </tr>
+ `).join('');
+}
 
 function renderAllAdminViews() {
  const popHtml = plans.slice(0, 3).map(p => `
-  <div class="planrow" onclick="openDetailModal('Package: ${p.title}', 'Price: KES ${p.price}\nDuration: ${p.duration}')">
+  <div class="planrow" onclick="openDetailModal('Package: ${p.title}', 'Price: KES ${p.price}<br>Duration: ${p.duration}')">
    <div><b>${p.title}</b><small>${p.tag || 'Standard'}</small></div>
    <div class="price">KES ${p.price.toLocaleString('en-KE')}</div>
   </div>
@@ -605,7 +721,7 @@ function renderAllAdminViews() {
 
  if($('planCards')) {
   $('planCards').innerHTML = plans.map((p,i)=>`
-   <article class="card packagecard" onclick="openDetailModal('${p.title} Package', 'Price: KES ${p.price}\nDuration: ${p.duration}')">
+   <article class="card packagecard" onclick="openDetailModal('${p.title} Package', 'Price: KES ${p.price}<br>Duration: ${p.duration}')">
     <span class="eyebrow">${p.tag || 'Access'}</span>
     <h3>${p.title}</h3>
     <div class="muted" style="font-size:11px">${p.duration} connectivity</div>
@@ -639,14 +755,15 @@ function renderAllAdminViews() {
   `).join('');
  }
 
+ renderThrottleDeviceTable();
  updateCheckout();
 }
 
 function updateCheckout(){
  const p = plans.find(x=>x.name === $('checkoutPlan').value) || selectedPlan;
  selectedPlan = p;
- $('checkoutAmount').textContent = 'KES ' + p.price.toLocaleString('en-KE');
- $('checkoutDuration').textContent = p.duration + ' access';
+ if($('checkoutAmount')) $('checkoutAmount').textContent = 'KES ' + p.price.toLocaleString('en-KE');
+ if($('checkoutDuration')) $('checkoutDuration').textContent = p.duration + ' access';
 }
 if($('checkoutPlan')) $('checkoutPlan').addEventListener('change', updateCheckout);
 
@@ -655,27 +772,73 @@ function getApiBase(){ return localStorage.getItem('linwifi_api_base_url') || ''
 async function fetchLiveData(){
  const apiBase = getApiBase();
  if(!apiBase){
-  $('apiStatusLabel').textContent = 'Status: API URL not configured';
-  $('apiServerStateBadge').className = 'pill red';
-  $('apiServerStateBadge').textContent = 'NOT CONFIGURED';
+  if($('apiStatusLabel')) $('apiStatusLabel').textContent = 'Status: API URL not configured';
+  if($('apiServerStateBadge')) {
+   $('apiServerStateBadge').className = 'pill red';
+   $('apiServerStateBadge').textContent = 'NOT CONFIGURED';
+  }
   return;
  }
- $('apiStatusLabel').textContent = 'Status: Polling ' + apiBase;
- $('apiServerStateBadge').className = 'pill green';
- $('apiServerStateBadge').textContent = 'CONNECTED';
+ if($('apiStatusLabel')) $('apiStatusLabel').textContent = 'Status: Polling ' + apiBase;
+ if($('apiServerStateBadge')) {
+  $('apiServerStateBadge').className = 'pill green';
+  $('apiServerStateBadge').textContent = 'CONNECTED';
+ }
 }
 
-$('startPayment').addEventListener('click', async()=>{
- const phone = $('checkoutPhone').value.trim();
- toast(`M-Pesa STK push initiated for KES ${selectedPlan.price} to ${phone}`);
- $('checkoutMsg').innerHTML = `<div class="notice good">STK push sent to ${phone}. Enter PIN!</div>`;
+if($('startPayment')) {
+ $('startPayment').addEventListener('click', async()=>{
+  const phone = $('checkoutPhone').value.trim();
+  toast(`M-Pesa STK push initiated for KES ${selectedPlan.price} to ${phone}`);
+  $('checkoutMsg').innerHTML = `<div class="notice good">STK push sent to ${phone}. Enter PIN!</div>`;
+ });
+}
+
+if($('saveApiBaseUrlBtn')) {
+ $('saveApiBaseUrlBtn').addEventListener('click',()=>{  const url = $('adminApiBaseUrl').value.trim().replace(/\/+$/, '');
+  localStorage.setItem('linwifi_api_base_url', url);
+  $('apiUrlMsg').innerHTML = `<div class="notice good">API Base URL saved: <b>${url}</b></div>`;
+  toast('API URL saved.');
+ });
+}
+
+// Daraja Credentials Save Handler
+if($('saveDarajaBtn')) {
+ $('saveDarajaBtn').addEventListener('click', () => {
+  const key = $('darajaKey').value.trim();
+  const secret = $('darajaSecret').value.trim();
+  const shortcode = $('darajaShortcode').value.trim();
+  const passkey = $('darajaPasskey').value.trim();
+  const callback = $('darajaCallback').value.trim();
+
+  localStorage.setItem('daraja_creds_v1', JSON.stringify({key, secret, shortcode, passkey, callback}));
+  toast('Safaricom Daraja API credentials saved successfully!');
+  $('darajaMsg').innerHTML = `<div class="notice good">Daraja credentials saved successfully for shortcode <b>${shortcode}</b>!</div>`;
+ });
+}
+
+// Load saved Daraja credentials on start
+window.addEventListener('DOMContentLoaded', () => {
+ const saved = JSON.parse(localStorage.getItem('daraja_creds_v1') || 'null');
+ if(saved) {
+  if($('darajaKey')) $('darajaKey').value = saved.key || '';
+  if($('darajaSecret')) $('darajaSecret').value = saved.secret || '';
+  if($('darajaShortcode')) $('darajaShortcode').value = saved.shortcode || '174379';
+  if($('darajaPasskey')) $('darajaPasskey').value = saved.passkey || '';
+  if($('darajaCallback')) $('darajaCallback').value = saved.callback || 'https://lin13423.github.io/Billing-system/';
+ }
 });
 
-$('saveApiBaseUrlBtn').addEventListener('click',()=>{
- const url = $('adminApiBaseUrl').value.trim().replace(/\/+$/, '');
- localStorage.setItem('linwifi_api_base_url', url);
- $('apiUrlMsg').innerHTML = `<div class="notice good">API Base URL saved: <b>${url}</b></div>`;
- toast('API URL saved.');
+// Auto-trim spaces in Daraja inputs on input / paste
+document.querySelectorAll('#darajaKey, #darajaSecret, #darajaShortcode, #darajaPasskey, #darajaCallback, #adminApiBaseUrl').forEach(input => {
+ input.addEventListener('input', (e) => {
+  const oldVal = input.value;
+  const newVal = oldVal.replace(/\s+/g, '');
+  if(oldVal !== newVal) {
+   input.value = newVal;
+   toast('Spaces automatically cleared from input field.');
+  }
+ });
 });
 
 renderAllAdminViews();

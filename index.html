@@ -397,7 +397,7 @@ function switchPortalMode(mode) {
     } else {
         tabRedeem.classList.add("active");
         tabBuy.classList.remove("active");
-        redeemSection.classList.remove("hidden");
+        redeemSection.classList.add("hidden");
         buySection.classList.add("hidden");
         payBar.classList.add("hidden");
     }
@@ -610,7 +610,7 @@ function timedFetch(url,options,timeout) {
 }
 
 /* ==========================================
-   REAL LIVE API REQUEST (DARAIJA STK PUSH)
+   REAL LIVE API REQUEST (DARAJA STK PUSH)
 ========================================== */
 
 async function apiRequest(endpoint,payload,requestID) {

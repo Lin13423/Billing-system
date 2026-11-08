@@ -2,1244 +2,236 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07111f">
-<title>Lin Billing System & Universal Access Gateway | Live Daraja</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<title>Lin Billing System & Universal Gateway | Nakuru</title>
 <style>
-:root {
-  --bg: #07111f;
-  --side: #091827;
-  --panel: #0e2032;
-  --panel2: #122940;
-  --line: #20394e;
-  --txt: #edf6ff;
-  --muted: #91a8bd;
-  --cyan: #4bdcf0;
-  --blue: #478cff;
-  --green: #29d6a1;
-  --amber: #ffb45f;
-  --red: #ff6d83;
-}
-body {
-  margin: 0;
-  background: radial-gradient(circle at 80% -10%, #123958 0, transparent 45%), var(--bg);
-  color: var(--txt);
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
-}
-.font-mono { font-family: 'JetBrains Mono', monospace; }
-.font-manrope { font-family: 'Manrope', sans-serif; }
-.scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
-.scrollbar-thin::-webkit-scrollbar-track { background: #071421; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: #1e3952; border-radius: 4px; }
-.online-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 10px var(--green);
-}
-.pulsing-dot {
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(41, 214, 161, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(41, 214, 161, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(41, 214, 161, 0); }
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--bg:#07111f;--side:#091827;--panel:#0e2032;--panel2:#122940;--line:#20394e;--txt:#edf6ff;--muted:#91a8bd;--cyan:#4bdcf0;--blue:#478cff;--green:#29d6a1;--amber:#ffb45f;--red:#ff6d83;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#123958 0,transparent 30%),var(--bg);color:var(--txt);font:14px 'DM Sans',sans-serif;min-height:100vh}button,input,select,textarea,code{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#0a1a2a,#071421);border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;z-index:5}.brand{display:flex;align-items:center;gap:11px;padding:5px 10px 23px}.logo{height:42px;width:42px;border-radius:14px;background:linear-gradient(135deg,#367dff,#39dfd0);display:grid;place-items:center;color:#041827;font-size:22px;font-weight:900;box-shadow:0 8px 25px #2bbce044}.brand b{font:800 17px Manrope;letter-spacing:1.5px}.brand b span{color:var(--cyan)}.brand small{display:block;color:#718ba2;font-size:9px;letter-spacing:1.8px;margin-top:3px}.navlabel{font-size:9px;color:#607b94;font-weight:800;letter-spacing:1.7px;padding:10px 12px}.nav{overflow:auto;scrollbar-width:thin}.nav button{width:100%;display:flex;align-items:center;gap:12px;text-align:left;padding:11px 12px;border:0;border-radius:11px;color:#9cb1c5;background:transparent;font-size:12px;font-weight:600;margin:2px 0;transition:.18s}.nav button:hover{background:#132b40;color:white}.nav button.active{background:linear-gradient(100deg,#17405a,#12334b);color:#f5fdff;box-shadow:inset 3px 0 var(--cyan)}.ico{width:19px;text-align:center;font-size:16px;color:#7fabc5}.nav button.active .ico{color:var(--cyan)}.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding:14px 8px 0}.network{border:1px solid #205044;background:#0c2a28;border-radius:12px;padding:12px}.network strong{font-size:11px;display:block}.network small{font-size:10px;color:#8db9aa;display:block;margin-top:5px}.online-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;box-shadow:0 0 9px var(--green)}.main{min-width:0}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#081725c9;backdrop-filter:blur(14px);position:sticky;top:0;z-index:4}.crumb{font:700 15px Manrope}.crumb small{display:block;color:var(--muted);font:11px 'DM Sans';margin-top:4px}.top-actions{display:flex;align-items:center;gap:10px}.iconbtn{height:38px;width:38px;border:1px solid var(--line);border-radius:11px;background:#102438;color:#bcd0e1;position:relative}.badge{position:absolute;right:-4px;top:-4px;background:var(--red);color:white;border-radius:20px;font-size:9px;padding:2px 5px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#3c8cff,#30d9c4);color:#051725;font-weight:900}.content{padding:27px 30px 42px;max-width:1500px;margin:auto}.page{display:none;animation:fade .2s ease}.page.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:22px}.eyebrow{color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}.pagehead h1{font:800 clamp(23px,3vw,30px) Manrope;margin:6px 0}.pagehead p{color:var(--muted);font-size:12px;margin:0;line-height:1.6}.btn{border:1px solid var(--line);background:#142b40;color:#dceeff;border-radius:11px;padding:10px 14px;font-size:11px;font-weight:800}.btn.primary{border:0;background:linear-gradient(100deg,#28d7c4,#4c9aff);color:#041827}.btn.green{background:#103b32;border-color:#216a56;color:#75f0c4}.btn.danger{background:#3b202b;border-color:#713949;color:#ff9aab}.btn:disabled{opacity:.45;cursor:not-allowed}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:17px}.card{background:linear-gradient(145deg,#10263a,#0b1c2c);border:1px solid var(--line);border-radius:var(--radius);padding:19px;min-width:0;box-shadow:0 12px 32px #00000016;cursor:pointer;transition:.15s}.card:hover{border-color:#2d506d}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.stat-value{font:800 26px Manrope;margin:12px 0 4px}.stat-foot{color:#7893aa;font-size:10px}.cols{grid-template-columns:1.35fr .85fr}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}.cardtitle h3{font:700 14px Manrope;margin:0}.muted{color:var(--muted)}.planrow,.listrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid #1e3548;cursor:pointer}.planrow:hover,.listrow:hover{background:#132a3e;padding-left:6px;padding-right:6px;border-radius:8px}.planrow:last-child,.listrow:last-child{border:0}.planrow b,.listrow b{font-size:12px}.planrow small,.listrow small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.price{font:800 16px Manrope;color:var(--green)}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:30px;background:#12382f;color:#79e8be;font-size:9px;font-weight:800}.pill.blue{background:#15334b;color:#8bcaff}.pill.amber{background:#3c2c1b;color:#ffc782}.pill.red{background:#40232d;color:#ff9bab}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label{display:block;font-size:10px;color:#a3b7c9;font-weight:800;letter-spacing:.7px;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #29445b;background:#081a2a;color:#f0f7ff;border-radius:11px;padding:12px 13px;outline:none;min-height:43px}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #4bdcf01a}.field.full{grid-column:1/-1}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.notice{padding:12px 14px;border-radius:11px;background:#102f43;border:1px solid #24506a;color:#b9d9ec;font-size:11px;line-height:1.6;margin:12px 0}.notice.good{background:#10352d;border-color:#23674f;color:#a3f1d2}.notice.danger{background:#3b202b;border-color:#713949;color:#ff9aab}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:13px}table{width:100%;border-collapse:collapse;min-width:570px}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid #1d3549;font-size:11px}th{color:#7894ab;font-size:9px;letter-spacing:1px;text-transform:uppercase;background:#0b1c2c}td{color:#d2e1ef}tr:hover td{background:#11273b;cursor:pointer}tr:last-child td{border-bottom:0}.empty{text-align:center;padding:30px;color:var(--muted);font-size:12px}.packagegrid{grid-template-columns:repeat(3,minmax(0,1fr))}.packagecard{position:relative}.packagecard h3{font:700 16px Manrope;margin:8px 0}.packagecard .bigprice{font:800 27px Manrope;margin:16px 0 4px}.speednum{font:800 45px Manrope;color:var(--cyan);margin:15px 0}.mobilemenu{display:none}.toast{position:fixed;right:22px;bottom:22px;background:#15364a;border:1px solid #34718b;color:#e8f8ff;padding:13px 17px;border-radius:12px;box-shadow:0 12px 35px #0008;z-index:20;font-size:12px;display:none;max-width:330px}.toast.show{display:block;animation:fade .2s}.footer{padding:20px 0;color:#637f96;font-size:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+@media(max-width:1050px){.app{grid-template-columns:220px 1fr}.stats{grid-template-columns:repeat(2,1fr)}.packagegrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.app{display:block}.sidebar{position:fixed;left:-270px;width:250px;transition:.25s;box-shadow:20px 0 50px #0008}.sidebar.open{left:0}.mobilemenu{display:inline-block}.topbar{height:66px;padding:0 15px}.content{padding:20px 14px 35px}.cols{grid-template-columns:1fr}.packagegrid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
-<body class="bg-[#07111f] text-[#edf6ff] antialiased">
-
-<div class="app flex min-h-screen">
-  <!-- SIDEBAR NAVIGATION -->
-  <aside id="sidebar" class="fixed lg:sticky top-0 left-[-280px] lg:left-0 w-[260px] h-screen bg-gradient-to-b from-[#0a1a2a] to-[#071421] border-r border-[#20394e] p-5 flex flex-col z-50 transition-all duration-300 shadow-2xl lg:shadow-none">
-    <div class="flex items-center gap-3 pb-6 border-b border-[#1b3247]">
-      <div class="h-11 w-11 rounded-xl bg-gradient-to-br from-[#367dff] to-[#39dfd0] grid place-items-center text-[#041827] text-2xl font-black shadow-lg shadow-cyan-500/20">⌁</div>
-      <div>
-        <b class="font-manrope font-extrabold text-base tracking-wider block">LIN<span class="text-[#4bdcf0]">BILLING</span></b>
-        <small class="text-[#718ba2] text-[9px] tracking-widest block uppercase font-bold">Universal Live Gateway</small>
-      </div>
-    </div>
-
-    <div class="text-[9px] text-[#607b94] font-extrabold tracking-widest uppercase mt-4 mb-2 px-2">Customer Experience</div>
-    <nav class="nav overflow-y-auto flex-1 scrollbar-thin space-y-1">
-      <button onclick="go('overview')" data-page="overview" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition active border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">▦</span> Overview
-      </button>
-      <button onclick="go('plans')" data-page="plans" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">◈</span> Internet Packages
-      </button>
-      <button onclick="go('checkout')" data-page="checkout" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">▣</span> Buy Internet (STK Push)
-      </button>
-      <button onclick="go('voucher')" data-page="voucher" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">▤</span> Voucher Redemption
-      </button>
-      <button onclick="go('connection')" data-page="connection" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">⌁</span> Live Connection Details
-      </button>
-
-      <div class="text-[9px] text-[#607b94] font-extrabold tracking-widest uppercase mt-4 mb-2 px-2">Network Control</div>
-      <button onclick="go('devices')" data-page="devices" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">▣</span> Router DHCP Leases
-      </button>
-      <button onclick="go('throttle')" data-page="throttle" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">⚡</span> Data Caps & Throttle
-      </button>
-      <button onclick="go('history')" data-page="history" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">◷</span> M-Pesa Ledger
-      </button>
-
-      <div class="text-[9px] text-[#607b94] font-extrabold tracking-widest uppercase mt-4 mb-2 px-2">Administration</div>
-      <button onclick="go('admin')" data-page="admin" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">▥</span> Admin Console (Paybill/Till)
-      </button>
-      <button onclick="go('errors')" data-page="errors" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">⚠</span> Callback & Error Trace
-      </button>
-      <button onclick="go('server')" data-page="server" class="nav-btn w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-[#9cb1c5] hover:bg-[#132b40] hover:text-white transition border-l-2 border-transparent">
-        <span class="text-base text-[#7fabc5]">⚙</span> Express Server Script
-      </button>
-    </nav>
-
-    <div class="pt-3 mt-auto border-t border-[#1b3247]">
-      <div class="border border-[#1e463a] bg-[#09221f] rounded-xl p-3">
-        <div class="flex items-center justify-between">
-          <strong class="text-xs text-emerald-400 flex items-center gap-2">
-            <span class="online-dot pulsing-dot"></span> Daraja STK Live
-          </strong>
-          <span class="text-[10px] bg-emerald-950 text-emerald-300 font-bold px-2 py-0.5 rounded-full">Active</span>
-        </div>
-        <small id="sideStatusText" class="text-[10px] text-[#7ebaa6] block mt-1 leading-tight">Shortcode: 174379 Ready</small>
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN CONTAINER -->
-  <main class="flex-1 min-w-0 flex flex-col">
-    <!-- TOPBAR -->
-    <header class="h-16 border-b border-[#20394e] flex items-center justify-between px-4 lg:px-8 bg-[#081725]/80 backdrop-blur-md sticky top-0 z-40">
-      <div class="flex items-center gap-3">
-        <button id="menuBtn" class="lg:hidden text-xl text-[#9cb1c5] hover:text-white p-2 border border-[#20394e] rounded-xl bg-[#0e2032]">☰</button>
-        <div id="crumb" class="font-manrope font-bold text-sm">
-          Overview <span class="block text-[11px] font-normal text-[#91a8bd]">Lin Live Gateway & M-Pesa STK Gateway</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <div class="hidden sm:flex items-center gap-2 bg-[#0d2235] border border-[#1e3952] px-3 py-1.5 rounded-full text-xs">
-          <span class="text-[#91a8bd]">Recipient Phone:</span>
-          <b id="topBarPhone" class="text-[#4bdcf0] font-mono">0713100424</b>
-        </div>
-        <button onclick="go('checkout')" class="bg-gradient-to-r from-[#29d6a1] to-[#478cff] text-[#041827] font-extrabold text-xs px-4 py-2 rounded-xl shadow-md shadow-emerald-500/10 hover:opacity-95 transition">
-          ＋ Buy Internet
-        </button>
-      </div>
-    </header>
-
-    <!-- CONTENT PAGES -->
-    <div class="p-4 lg:p-8 max-w-7xl w-full mx-auto flex-1">
-
-      <!-- PAGE: OVERVIEW -->
-      <section id="page-overview" class="page active space-y-6">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">LIN BILLING SYSTEM / LIVE GATEWAY</div>
-            <h1 class="text-2xl lg:text-3xl font-extrabold font-manrope mt-1">Smart Connectivity & Live STK Billing</h1>
-            <p class="text-xs text-[#91a8bd] mt-1">Full Safaricom Daraja STK Push integration. Live shortcode configured with pre-filled production credentials.</p>
-          </div>
-        </div>
-
-        <!-- STATS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-gradient-to-br from-[#10263a] to-[#0b1c2c] border border-[#20394e] rounded-2xl p-5">
-            <div class="flex justify-between text-xs text-[#91a8bd]">Today's Revenue <span>💰</span></div>
-            <div id="statRevenue" class="text-2xl font-extrabold font-manrope text-white my-2">KES 0</div>
-            <div class="text-[10px] text-[#7893aa]">Live Database Total</div>
-          </div>
-          <div class="bg-gradient-to-br from-[#10263a] to-[#0b1c2c] border border-[#20394e] rounded-2xl p-5">
-            <div class="flex justify-between text-xs text-[#91a8bd]">Active Sessions <span>👥</span></div>
-            <div id="statSessions" class="text-2xl font-extrabold font-manrope text-white my-2">3 Leases</div>
-            <div class="text-[10px] text-[#7893aa]">MikroTik Router Synced</div>
-          </div>
-          <div class="bg-gradient-to-br from-[#10263a] to-[#0b1c2c] border border-[#20394e] rounded-2xl p-5">
-            <div class="flex justify-between text-xs text-[#91a8bd]">Daraja API Status <span>📡</span></div>
-            <div class="text-xl font-extrabold font-manrope text-[#29d6a1] my-2 flex items-center gap-2">
-              <span class="online-dot pulsing-dot"></span> LIVE / READY
-            </div>
-            <div class="text-[10px] text-[#7893aa]">Credentials Auto-Loaded</div>
-          </div>
-          <div class="bg-gradient-to-br from-[#10263a] to-[#0b1c2c] border border-[#20394e] rounded-2xl p-5">
-            <div class="flex justify-between text-xs text-[#91a8bd]">Admin Target <span>📱</span></div>
-            <div id="statTargetPhone" class="text-lg font-extrabold font-mono text-[#4bdcf0] my-2">0713100424</div>
-            <div class="text-[10px] text-[#7893aa]">Live Recipient Phone</div>
-          </div>
-        </div>
-
-        <!-- QUICK ACTIONS & PACKAGES -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="lg:col-span-2 bg-[#10263a] border border-[#20394e] rounded-2xl p-5 space-y-4">
-            <div class="flex justify-between items-center">
-              <h3 class="font-bold text-sm font-manrope">Instant Gateway Controls</h3>
-              <span class="bg-[#15334b] text-[#8bcaff] text-[10px] font-bold px-2.5 py-1 rounded-full">REAL DARAJA STK</span>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <button onclick="go('checkout')" class="bg-[#142b40] hover:bg-[#1c3c5a] border border-[#20394e] text-xs font-bold p-3 rounded-xl text-left transition">
-                <span class="text-[#4bdcf0] block text-base mb-1">▣</span> Trigger STK Push
-              </button>
-              <button onclick="go('admin')" class="bg-[#142b40] hover:bg-[#1c3c5a] border border-[#20394e] text-xs font-bold p-3 rounded-xl text-left transition">
-                <span class="text-[#29d6a1] block text-base mb-1">▥</span> Edit Till / Phone
-              </button>
-              <button onclick="go('devices')" class="bg-[#142b40] hover:bg-[#1c3c5a] border border-[#20394e] text-xs font-bold p-3 rounded-xl text-left transition">
-                <span class="text-[#ffb45f] block text-base mb-1">👥</span> Manage DHCP Devices
-              </button>
-              <button onclick="go('errors')" class="bg-[#142b40] hover:bg-[#1c3c5a] border border-[#20394e] text-xs font-bold p-3 rounded-xl text-left transition">
-                <span class="text-[#ff6d83] block text-base mb-1">⚠</span> Real-Time Error Logs
-              </button>
-              <button onclick="go('throttle')" class="bg-[#142b40] hover:bg-[#1c3c5a] border border-[#20394e] text-xs font-bold p-3 rounded-xl text-left transition">
-                <span class="text-[#4bdcf0] block text-base mb-1">⚡</span> Bandwidth Controls
-              </button>
-              <button onclick="go('server')" class="bg-[#142b40] hover:bg-[#1c3c5a] border border-[#20394e] text-xs font-bold p-3 rounded-xl text-left transition">
-                <span class="text-[#29d6a1] block text-base mb-1">⚙</span> Express Node Code
-              </button>
-            </div>
-            <div class="bg-[#0b1a27] border border-[#1d384e] rounded-xl p-4 text-xs text-[#91a8bd] leading-relaxed">
-              <strong class="text-[#29d6a1] block mb-1">Live Backend Status: Ready & Pre-Configured</strong>
-              Your Daraja credentials (Consumer Key, Consumer Secret, Passkey) are pre-filled in the background. Simply type a phone number or Paybill/Till shortcode in Admin Settings to process real M-Pesa STK prompts instantly.
-            </div>
-          </div>
-
-          <div class="bg-[#10263a] border border-[#20394e] rounded-2xl p-5 flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="font-bold text-sm font-manrope">Top Selling Plan</h3>
-                <button onclick="go('plans')" class="text-xs text-[#4bdcf0] font-bold hover:underline">View All</button>
-              </div>
-              <div class="bg-[#0b1c2c] border border-[#1e3952] rounded-xl p-4 text-center">
-                <div class="text-[10px] text-[#ffb45f] font-extrabold uppercase tracking-wider mb-1">Most Popular</div>
-                <div class="text-xl font-black font-manrope">12 Hours High Speed</div>
-                <div class="text-3xl font-extrabold font-manrope text-[#29d6a1] my-2">KES 50</div>
-                <ul class="text-xs text-[#91a8bd] space-y-1 mb-4 text-left border-t border-[#1d3549] pt-3">
-                  <li class="flex items-center gap-2"><span class="text-[#29d6a1]">✓</span> 720 Minutes Full Access</li>
-                  <li class="flex items-center gap-2"><span class="text-[#29d6a1]">✓</span> Instant Automatic Auth</li>
-                  <li class="flex items-center gap-2"><span class="text-[#29d6a1]">✓</span> STK Prompt Direct to Phone</li>
-                </ul>
-                <button onclick="selectCheckoutPlan(3)" class="w-full bg-gradient-to-r from-[#29d6a1] to-[#478cff] text-[#041827] font-extrabold text-xs py-2.5 rounded-xl hover:opacity-95 transition">
-                  BUY THIS NOW →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: PLANS -->
-      <section id="page-plans" class="page hidden space-y-6">
-        <div>
-          <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">PLANS & PRICING</div>
-          <h1 class="text-2xl font-extrabold font-manrope mt-1">Select Your Access Duration</h1>
-          <p class="text-xs text-[#91a8bd] mt-1">Tap any plan to select it and proceed to instant Safaricom M-Pesa STK Push payment.</p>
-        </div>
-
-        <div id="planCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Dynamic rendering via JavaScript -->
-        </div>
-      </section>
-
-      <!-- PAGE: CHECKOUT -->
-      <section id="page-checkout" class="page hidden space-y-6">
-        <div>
-          <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">LIVE M-PESA DARAJA CHECKOUT</div>
-          <h1 class="text-2xl font-extrabold font-manrope mt-1">Request M-Pesa STK Push</h1>
-          <p class="text-xs text-[#91a8bd] mt-1">Enter any Safaricom phone number below to receive an instant PIN popup on your mobile device.</p>
-        </div>
-
-        <div id="checkoutScrollTarget" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-7 bg-[#10263a] border border-[#20394e] rounded-2xl p-6 space-y-5">
-            <h3 class="font-bold text-sm font-manrope border-b border-[#1e3952] pb-3">Payment Details</h3>
-            
-            <div class="space-y-4">
-              <div>
-                <label class="block text-xs font-bold text-[#a3b7c9] uppercase tracking-wider mb-2">Selected Package</label>
-                <select id="checkoutPlanSelect" class="w-full bg-[#081a2a] border border-[#29445b] text-white text-xs rounded-xl p-3 outline-none focus:border-[#4bdcf0]">
-                  <!-- Populated dynamically -->
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-[#a3b7c9] uppercase tracking-wider mb-2">Safaricom Phone Number (Phone to Pay)</label>
-                <input id="checkoutPhoneInput" type="tel" value="0713100424" class="w-full bg-[#081a2a] border border-[#29445b] text-white font-mono text-sm rounded-xl p-3 outline-none focus:border-[#4bdcf0]" placeholder="07XXXXXXXX or 2547XXXXXXXX">
-                <span class="text-[10px] text-[#7a93a8] mt-1 block">The phone will receive the M-Pesa STK PIN prompt immediately.</span>
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-[#a3b7c9] uppercase tracking-wider mb-2">Target Paybill / Till / Shortcode</label>
-                <input id="checkoutShortcodeDisplay" type="text" readonly class="w-full bg-[#071320] border border-[#1a3247] text-[#4bdcf0] font-mono text-xs rounded-xl p-3 cursor-not-allowed opacity-90" value="174379 (Daraja Live API)">
-              </div>
-            </div>
-
-            <div class="bg-[#0b1c2b] border border-[#1e3a54] rounded-xl p-4 text-xs text-[#9cb5c9] leading-relaxed">
-              <strong class="text-white block mb-1">Live Backend Dispatch:</strong>
-              Clicking below sends an HTTPS request to Safaricom Daraja API using pre-filled live keys. Instant response will be logged on screen.
-            </div>
-
-            <button id="triggerStkBtn" onclick="triggerLiveStkPush()" class="w-full bg-gradient-to-r from-[#29d6a1] to-[#478cff] text-[#041827] font-black text-sm py-3.5 rounded-xl shadow-lg shadow-emerald-500/20 hover:opacity-95 transition flex items-center justify-center gap-2">
-              <span>🚀 REQUEST M-PESA STK PUSH NOW</span>
-            </button>
-
-            <div id="stkResponseBox" class="hidden rounded-xl p-4 text-xs font-mono border space-y-2 leading-relaxed">
-              <!-- Dynamically populated response -->
-            </div>
-          </div>
-
-          <!-- SUMMARY CARD -->
-          <div class="lg:col-span-5 bg-[#10263a] border border-[#20394e] rounded-2xl p-6 flex flex-col justify-between">
-            <div class="space-y-4">
-              <h3 class="font-bold text-sm font-manrope border-b border-[#1e3952] pb-3">Order Summary</h3>
-              <div class="text-center py-6 bg-[#091a29] border border-[#1c364e] rounded-2xl">
-                <div class="text-4xl mb-2">▣</div>
-                <div class="text-[10px] text-[#7fa3bf] uppercase tracking-widest font-bold">Amount to Pay</div>
-                <div id="checkoutSummaryPrice" class="text-4xl font-black font-manrope text-[#4bdcf0] my-2">KES 50</div>
-                <div id="checkoutSummaryDuration" class="text-xs text-[#91a8bd]">12 Hours High-Speed Internet Access</div>
-              </div>
-
-              <div class="space-y-2 text-xs">
-                <div class="flex justify-between py-2 border-b border-[#1b344a]">
-                  <span class="text-[#7fa3bf]">Gateway Provider</span>
-                  <span class="font-bold">Lin Billing Systems</span>
-                </div>
-                <div class="flex justify-between py-2 border-b border-[#1b344a]">
-                  <span class="text-[#7fa3bf]">Support Hotline</span>
-                  <span class="font-bold text-[#4bdcf0]">0713100424</span>
-                </div>
-                <div class="flex justify-between py-2 border-b border-[#1b344a]">
-                  <span class="text-[#7fa3bf]">Authorization</span>
-                  <span class="font-bold text-[#29d6a1]">Instant Router Callback</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-6 border-t border-[#1e3952] pt-4 text-center">
-              <small class="text-[10px] text-[#718da6]">Encrypted TLS 1.3 Communication with Safaricom Daraja</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: VOUCHER -->
-      <section id="page-voucher" class="page hidden space-y-6">
-        <div>
-          <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">PREPAID VOUCHERS</div>
-          <h1 class="text-2xl font-extrabold font-manrope mt-1">Redeem Scratch Code</h1>
-          <p class="text-xs text-[#91a8bd] mt-1">Redeem a printed physical card or unique access token for offline activation.</p>
-        </div>
-
-        <div class="max-w-xl bg-[#10263a] border border-[#20394e] rounded-2xl p-6 space-y-5">
-          <div>
-            <label class="block text-xs font-bold text-[#a3b7c9] uppercase tracking-wider mb-2">Enter Voucher Code</label>
-            <input id="voucherInput" type="text" placeholder="e.g. LIN-8849-2026" class="w-full bg-[#081a2a] border border-[#29445b] text-white font-mono text-sm rounded-xl p-3 outline-none focus:border-[#4bdcf0] uppercase tracking-wider">
-          </div>
-          <button onclick="redeemVoucher()" class="w-full bg-[#29d6a1] text-[#041827] font-black text-xs py-3 rounded-xl hover:opacity-95 transition">
-            VERIFY & REDEEM VOUCHER NOW
-          </button>
-          <div id="voucherStatus" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
-        </div>
-      </section>
-
-      <!-- PAGE: CONNECTION DETAILS -->
-      <section id="page-connection" class="page hidden space-y-6">
-        <div>
-          <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">ROUTER GATEWAY TELEMETRY</div>
-          <h1 class="text-2xl font-extrabold font-manrope mt-1">Active Network Session</h1>
-          <p class="text-xs text-[#91a8bd] mt-1">Real-time status of your connected network node, assigned IP, and remaining session time.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-[#10263a] border border-[#20394e] rounded-2xl p-6 text-center space-y-4">
-            <span class="inline-flex items-center gap-2 bg-[#0c2e27] border border-[#1b6b58] text-[#34ebb4] text-xs font-bold px-3 py-1 rounded-full">
-              <span class="online-dot pulsing-dot"></span> SESSION AUTHORIZED & ACTIVE
-            </span>
-            <div class="text-xs text-[#91a8bd]">Time Remaining Until Renewal</div>
-            <div id="sessionCountdown" class="text-4xl font-extrabold font-mono text-[#4bdcf0] my-2">11h : 59m : 45s</div>
-            <p class="text-xs text-[#738ea7]">Auto-disconnection triggered upon expiry. Renew via STK push anytime.</p>
-          </div>
-
-          <div class="bg-[#10263a] border border-[#20394e] rounded-2xl p-6 space-y-3 text-xs">
-            <h3 class="font-bold text-sm font-manrope border-b border-[#1e3952] pb-3">Gateway Telemetry</h3>
-            <div class="flex justify-between py-2 border-b border-[#1d3549]">
-              <span class="text-[#849eb5]">Assigned IP</span>
-              <span class="font-mono text-white">192.168.8.45</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-[#1d3549]">
-              <span class="text-[#849eb5]">Device MAC Address</span>
-              <span class="font-mono text-white">A2:4F:88:12:9E:C1</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-[#1d3549]">
-              <span class="text-[#849eb5]">Linked SSID</span>
-              <span class="font-bold text-[#4bdcf0]">Lin_Billing_Gateway</span>
-            </div>
-            <div class="flex justify-between py-2">
-              <span class="text-[#849eb5]">Signal Strength</span>
-              <span class="font-bold text-[#29d6a1]">-56 dBm (Excellent)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: DHCP LEASES / DEVICES -->
-      <section id="page-devices" class="page hidden space-y-6">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">ROUTER CLIENT MANAGEMENT</div>
-            <h1 class="text-2xl font-extrabold font-manrope mt-1">Live Router DHCP Leases</h1>
-            <p class="text-xs text-[#91a8bd] mt-1">Admin control room: Click any device to alter speed limits (Mbps), pause, or block connection.</p>
-          </div>
-          <button onclick="refreshLeases()" class="bg-[#142b40] hover:bg-[#1f3f5c] border border-[#20394e] text-xs font-bold px-4 py-2 rounded-xl transition">
-            ↻ Refresh Leases
-          </button>
-        </div>
-
-        <div class="bg-[#10263a] border border-[#20394e] rounded-2xl overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-[#0b1c2c] text-[#7894ab] text-[10px] uppercase font-bold border-b border-[#1e3952]">
-                <tr>
-                  <th class="p-4">Hostname / Device</th>
-                  <th class="p-4">IP Address</th>
-                  <th class="p-4">MAC Address</th>
-                  <th class="p-4">Speed Limit</th>
-                  <th class="p-4">Status & Control</th>
-                </tr>
-              </thead>
-              <tbody id="dhcpTableRows" class="divide-y divide-[#1e3952]">
-                <!-- Dynamically populated -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: THROTTLE & DATA CAPS -->
-      <section id="page-throttle" class="page hidden space-y-6">
-        <div>
-          <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">BANDWIDTH & QUEUE CONTROL</div>
-          <h1 class="text-2xl font-extrabold font-manrope mt-1">Data Caps & Speed Limits</h1>
-          <p class="text-xs text-[#91a8bd] mt-1">Configure global simple queues or selective speed limits per MAC address.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-[#10263a] border border-[#20394e] rounded-2xl p-6 space-y-4">
-            <h3 class="font-bold text-sm font-manrope text-[#4bdcf0]">Global Speed Limit (All Devices)</h3>
-            <div>
-              <label class="block text-xs font-bold text-[#a3b7c9] mb-2">Maximum Download / Upload (e.g. 15M/15M)</label>
-              <input id="globalSpeedInput" type="text" value="15M/15M" class="w-full bg-[#081a2a] border border-[#29445b] text-white text-xs rounded-xl p-3 outline-none">
-            </div>
-            <button onclick="saveGlobalThrottle()" class="w-full bg-[#29d6a1] text-[#041827] font-black text-xs py-3 rounded-xl hover:opacity-95 transition">
-              ENFORCE GLOBAL SPEED QUEUE
-            </button>
-          </div>
-
-          <div class="bg-[#10263a] border border-[#20394e] rounded-2xl p-6 space-y-4">
-            <h3 class="font-bold text-sm font-manrope text-[#ffb45f]">Global Data Consumption Cap</h3>
-            <div>
-              <label class="block text-xs font-bold text-[#a3b7c9] mb-2">Max MB per Session (0 = Unlimited)</label>
-              <input id="globalDataCapInput" type="number" value="5000" class="w-full bg-[#081a2a] border border-[#29445b] text-white text-xs rounded-xl p-3 outline-none">
-            </div>
-            <button onclick="saveGlobalDataCap()" class="w-full bg-[#ffb45f] text-[#041827] font-black text-xs py-3 rounded-xl hover:opacity-95 transition">
-              APPLY GLOBAL DATA CAP
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: M-PESA LEDGER -->
-      <section id="page-history" class="page hidden space-y-6">
-        <div class="flex justify-between items-center">
-          <div>
-            <div class="text-[#4bdcf0] text-[10px] font-extrabold tracking-widest uppercase">TRANSACTION RECORD</div>
-            <h1 class="text-2xl font-extrabold font-manrope mt-1">Confirmed M-Pesa Ledger</h1>
-            <p class="text-xs text-[#91a8bd] mt-1">All processed STK push transactions and callback receipts.</p>
-          </div>
-          <button onclick="exportLedgerCsv()" class="bg-[#142b40] hover:bg-[#1f3f5c] border border-[#20394e] text-xs font-bold px-4 py-2 rounded-xl transition">
-            ↓ Export CSV
-          </button>
-        </div>
-
-        <div class="bg-[#10263a] border border-[#20394e] rounded-2xl overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-[#0b1c2c] text-[#7894ab] text-[10px] uppercase font-bold border-b border-[#1e3952]">
-                <tr>
-                  <th class="p-4">Timestamp</th>
-                  <th class="p-4">Receipt / Checkout ID</th>
-                  <th class="p-4">Package</th>
-                  <th class="p-4">Amount</th>
-                  <th class="p-4">Phone Number</th>
-                  <th class="p-4">Status</th>
-                </tr>
-              </thead>
-              <tbody id="historyTableRows" class="divide-y divide-[#1e3952]">
-                <!-- Populated dynamically -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: ADMIN OPERATOR CONSOLE -->
-      <section id="page-admin" class="page hidden space-y-6">
-        <div class="flex justify-between items-start">
-          <div>
-            <div class="text-[#29d6a1] text-[10px] font-extrabold tracking-widest uppercase">OPERATOR CONSOLE / LIVE CONFIG</div>
-            <h1 class="text-2xl font-extrabold font-manrope mt-1">Admin Billing & Till Config</h1>
-            <p class="text-xs text-[#91a8bd] mt-1">Default credentials are pre-filled. Enter ONLY the Phone Number or Shortcode (Till/Paybill) that receives payment.</p>
-          </div>
-          <span class="bg-emerald-950 border border-emerald-700 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">
-            AUTHENTICATED ADMIN
-          </span>
-        </div>
-
-        <!-- SIMPLIFIED ADMIN CONFIGURATION CARD -->
-        <div class="bg-gradient-to-br from-[#102a40] to-[#0b1d2e] border-2 border-[#39dfd0]/40 rounded-2xl p-6 space-y-5 shadow-xl">
-          <div class="flex items-center gap-3 border-b border-[#20425c] pb-4">
-            <div class="text-2xl">⚡</div>
-            <div>
-              <h3 class="font-extrabold text-base font-manrope text-white">Live Payment Recipient Configuration</h3>
-              <p class="text-xs text-[#91a8bd]">Provide only the target phone number or shortcode. All required Safaricom keys are already active.</p>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <label class="block text-xs font-bold text-[#4bdcf0] uppercase tracking-wider mb-2">1. Phone Number (Admin / Recipient Phone)</label>
-              <input id="adminPhoneInput" type="tel" value="0713100424" class="w-full bg-[#071524] border border-[#2d5678] text-white font-mono text-sm rounded-xl p-3 outline-none focus:border-[#4bdcf0]" placeholder="07XXXXXXXX">
-              <span class="text-[10px] text-[#7ca0bf] mt-1 block">Receives payment notifications and default STK prompts.</span>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-[#29d6a1] uppercase tracking-wider mb-2">2. Business Shortcode (Till or Paybill Number)</label>
-              <input id="adminShortcodeInput" type="text" value="174379" class="w-full bg-[#071524] border border-[#2d5678] text-white font-mono text-sm rounded-xl p-3 outline-none focus:border-[#29d6a1]" placeholder="e.g. 174379 or Till Number">
-              <span class="text-[10px] text-[#7ca0bf] mt-1 block">Default Daraja sandbox shortcode is pre-configured for live tests.</span>
-            </div>
-          </div>
-
-          <!-- PRE-FILLED ADVANCED CREDENTIALS ACCORDION -->
-          <div class="border-t border-[#20425c] pt-4">
-            <details class="group">
-              <summary class="cursor-pointer text-xs font-bold text-[#8faec9] hover:text-white flex items-center justify-between">
-                <span>🔒 View Pre-Filled Safaricom Live Credentials (Auto-Configured)</span>
-                <span class="group-open:rotate-180 transition">▼</span>
-              </summary>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 bg-[#071524] p-4 rounded-xl border border-[#1b3850] text-xs">
-                <div>
-                  <label class="block text-[10px] font-bold text-[#7ca0bf] mb-1">Consumer Key</label>
-                  <input id="adminConsumerKey" type="text" readonly value="AGJGJGGktfRf8OHhos6TJXKupDMb3f2wG9pZDdF8tG5qm0qK" class="w-full bg-[#040e18] border border-[#1b344b] text-emerald-400 font-mono text-[11px] p-2 rounded-lg opacity-80">
-                </div>
-                <div>
-                  <label class="block text-[10px] font-bold text-[#7ca0bf] mb-1">Secret Key</label>
-                  <input id="adminConsumerSecret" type="password" readonly value="xmd2sXJzRA6Chl1KHGvR9jG0qtSBse1oRBCdgBjb4DnO7SEi4QzPVwKNWWraubJd" class="w-full bg-[#040e18] border border-[#1b344b] text-emerald-400 font-mono text-[11px] p-2 rounded-lg opacity-80">
-                </div>
-                <div>
-                  <label class="block text-[10px] font-bold text-[#7ca0bf] mb-1">Passkey</label>
-                  <input id="adminPasskey" type="password" readonly value="103f80194fedeaefb352960fb340d766ef3f84a9dcb96aafdd21d0b0bb8dfbab" class="w-full bg-[#040e18] border border-[#1b344b] text-emerald-400 font-mono text-[11px] p-2 rounded-lg opacity-80">
-                </div>
-              </div>
-            </details>
-          </div>
-
-          <div class="flex justify-end pt-2">
-            <button onclick="saveAdminSettings()" class="bg-gradient-to-r from-[#29d6a1] to-[#367dff] text-[#041827] font-black text-xs px-6 py-3 rounded-xl shadow-lg hover:opacity-95 transition">
-              SAVE RECIPIENT SETTINGS & BIND STK
-            </button>
-          </div>
-        </div>
-
-        <!-- PACKAGE EDITOR -->
-        <div class="bg-[#10263a] border border-[#20394e] rounded-2xl p-6 space-y-4">
-          <h3 class="font-bold text-sm font-manrope">Manage Internet Packages (Live Admin Editor)</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-[#0b1c2c] text-[#7894ab] text-[10px] uppercase font-bold border-b border-[#1e3952]">
-                <tr>
-                  <th class="p-3">Title</th>
-                  <th class="p-3">Duration</th>
-                  <th class="p-3">Price (KES)</th>
-                  <th class="p-3">Badge Tag</th>
-                  <th class="p-3">Action</th>
-                </tr>
-              </thead>
-              <tbody id="adminPackageRows" class="divide-y divide-[#1e3952]">
-                <!-- Dynamically populated -->
-              </tbody>
-            </table>
-          </div>
-
-          <div class="bg-[#071726] border border-[#1f3b54] rounded-xl p-4 space-y-3 mt-4">
-            <h4 class="text-xs font-bold text-[#4bdcf0]">Add New Package Plan</h4>
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-              <input id="newPkgTitle" type="text" placeholder="Package Title (e.g. 2 Days)" class="bg-[#0b1e30] border border-[#284866] text-xs p-2.5 rounded-lg text-white">
-              <input id="newPkgDuration" type="text" placeholder="Duration (e.g. 48 hours)" class="bg-[#0b1e30] border border-[#284866] text-xs p-2.5 rounded-lg text-white">
-              <input id="newPkgPrice" type="number" placeholder="Price in KES" class="bg-[#0b1e30] border border-[#284866] text-xs p-2.5 rounded-lg text-white">
-              <input id="newPkgTag" type="text" placeholder="Tag (e.g. Popular)" class="bg-[#0b1e30] border border-[#284866] text-xs p-2.5 rounded-lg text-white">
-            </div>
-            <button onclick="addNewPackage()" class="bg-[#367dff] text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-              ＋ Add Package
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: ERRORS & CALLBACK LOGS -->
-      <section id="page-errors" class="page hidden space-y-6">
-        <div class="flex justify-between items-center">
-          <div>
-            <div class="text-[#ff6d83] text-[10px] font-extrabold tracking-widest uppercase">DIAGNOSTICS & TRACE</div>
-            <h1 class="text-2xl font-extrabold font-manrope mt-1">Live Callback & Error Logs</h1>
-            <p class="text-xs text-[#91a8bd] mt-1">Real-time HTTP payloads, Safaricom STK callbacks, and error responses.</p>
-          </div>
-          <button onclick="clearErrorLogs()" class="bg-[#3b202b] text-[#ff9aab] border border-[#713949] text-xs font-bold px-4 py-2 rounded-xl transition">
-            🗑 Clear Logs
-          </button>
-        </div>
-
-        <div class="bg-[#10263a] border border-[#20394e] rounded-2xl overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-[#0b1c2c] text-[#7894ab] text-[10px] uppercase font-bold border-b border-[#1e3952]">
-                <tr>
-                  <th class="p-4">Timestamp</th>
-                  <th class="p-4">Source / Action</th>
-                  <th class="p-4">Code / Status</th>
-                  <th class="p-4">Payload / Summary</th>
-                </tr>
-              </thead>
-              <tbody id="errorLogTableRows" class="divide-y divide-[#1e3952] font-mono text-[11px]">
-                <!-- Dynamically populated -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: BACKEND SERVER CODE SCRIPT -->
-      <section id="page-server" class="page hidden space-y-6">
-        <div>
-          <div class="text-[#29d6a1] text-[10px] font-extrabold tracking-widest uppercase">PRODUCTION NODE.JS SERVER</div>
-          <h1 class="text-2xl font-extrabold font-manrope mt-1">Live Express Backend Server Code</h1>
-          <p class="text-xs text-[#91a8bd] mt-1">Full standalone Node.js script handling OAuth, STK Push, Webhook Callback, and Router authorization.</p>
-        </div>
-
-        <div class="bg-[#071626] border border-[#1e3b56] rounded-2xl p-4 relative">
-          <button onclick="copyServerCode()" class="absolute top-4 right-4 bg-[#142b40] hover:bg-[#1f4263] border border-[#264b6e] text-xs font-bold text-[#4bdcf0] px-3 py-1.5 rounded-lg transition">
-            📋 Copy Node.js Code
-          </button>
-          <pre class="font-mono text-xs text-[#b0d2ee] overflow-x-auto p-4 leading-relaxed scrollbar-thin">
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-// PRE-FILLED LIVE SAFARICOM DARAJA CREDENTIALS
-const CONSUMER_KEY = 'AGJGJGGktfRf8OHhos6TJXKupDMb3f2wG9pZDdF8tG5qm0qK';
-const CONSUMER_SECRET = 'xmd2sXJzRA6Chl1KHGvR9jG0qtSBse1oRBCdgBjb4DnO7SEi4QzPVwKNWWraubJd';
-const PASSKEY = '103f80194fedeaefb352960fb340d766ef3f84a9dcb96aafdd21d0b0bb8dfbab';
-const SHORTCODE = '174379'; // Paybill or Till Shortcode
-
-// 1. GET DARAJA OAUTH ACCESS TOKEN
-async function getAccessToken() {
-    const auth = Buffer.from(`${CONSUMER_KEY}:${CONSUMER_SECRET}`).toString('base64');
-    const url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-    const response = await axios.get(url, { headers: { Authorization: `Basic ${auth}` } });
-    return response.data.access_token;
-}
-
-// 2. TRIGGER DARAJA STK PUSH
-app.post('/api/stkpush', async (req, res) => {
-    try {
-        const { phone, amount, callbackUrl } = req.body;
-        const token = await getAccessToken();
-        const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 14);
-        const password = Buffer.from(`${SHORTCODE}${PASSKEY}${timestamp}`).toString('base64');
-
-        const formattedPhone = phone.replace(/^0/, '254');
-        const payload = {
-            BusinessShortCode: SHORTCODE,
-            Password: password,
-            Timestamp: timestamp,
-            TransactionType: 'CustomerPayBillOnline',
-            Amount: Math.round(amount),
-            PartyA: formattedPhone,
-            PartyB: SHORTCODE,
-            PhoneNumber: formattedPhone,
-            CallBackURL: callbackUrl || 'https://lin13423.github.io/Billing-system/callback',
-            AccountReference: 'LinWifi',
-            TransactionDesc: 'Internet Access Purchase'
-        };
-
-        const response = await axios.post(
-            'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-            payload,
-            { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        res.json({ success: true, data: response.data });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.response?.data || error.message });
-    }
-});
-
-// 3. INSTANT CALLBACK WEBHOOK ENDPOINT
-app.post('/api/callback', (req, res) => {
-    const callbackData = req.body.Body.stkCallback;
-    console.log('Received M-Pesa Callback:', JSON.stringify(callbackData, null, 2));
-
-    if (callbackData.ResultCode === 0) {
-        // SUCCESS: Authorize device on router gateway
-        const items = callbackData.CallbackMetadata.Item;
-        const amount = items.find(i => i.Name === 'Amount')?.Value;
-        const receipt = items.find(i => i.Name === 'MpesaReceiptNumber')?.Value;
-        const phone = items.find(i => i.Name === 'PhoneNumber')?.Value;
-
-        console.log(`[ROUTER AUTH] Device Paid ${amount} KES via ${receipt} (${phone}). Session Unlocked!`);
-    } else {
-        console.log(`[STK CANCEL] Transaction failed with code ${callbackData.ResultCode}`);
-    }
-
-    res.json({ ResultCode: 0, ResultDesc: 'Accepted' });
-});
-
-app.listen(3000, () => console.log('Lin Billing Gateway Server running on port 3000'));
-          </pre>
-        </div>
-      </section>
-
-    </div>
-  </main>
-</div>
-
-<!-- DEVICE ADMIN MANAGEMENT MODAL -->
-<div id="deviceModal" class="fixed inset-0 bg-[#030f1c]/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-  <div class="bg-[#0d2235] border border-[#284c6c] rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-4">
-    <div class="flex justify-between items-center border-b border-[#1f3a52] pb-3">
-      <h3 id="devModalHost" class="font-bold text-base font-manrope text-[#4bdcf0]">Device Control</h3>
-      <button onclick="closeDeviceModal()" class="text-xs text-[#91a8bd] hover:text-white">✕</button>
-    </div>
-    
-    <div class="space-y-3 text-xs">
-      <input type="hidden" id="devModalMac">
-      <div class="flex justify-between py-1 border-b border-[#183147]">
-        <span class="text-[#84a3be]">IP Address</span>
-        <span id="devModalIp" class="font-mono text-white"></span>
-      </div>
-      <div class="flex justify-between py-1 border-b border-[#183147]">
-        <span class="text-[#84a3be]">MAC Address</span>
-        <span id="devModalMacText" class="font-mono text-white"></span>
-      </div>
-
-      <div>
-        <label class="block text-xs font-bold text-[#a3b7c9] mb-1">Speed Limit Rate (Mbps)</label>
-        <div class="flex items-center gap-3">
-          <input type="range" id="devSpeedRange" min="1" max="100" value="10" class="flex-1" oninput="document.getElementById('devSpeedVal').textContent = this.value + ' Mbps'">
-          <span id="devSpeedVal" class="font-bold font-mono text-[#4bdcf0] min-w-[70px]">10 Mbps</span>
-        </div>
-      </div>
-
-      <div>
-        <label class="block text-xs font-bold text-[#a3b7c9] mb-1">Access Status</label>
-        <select id="devAccessStatus" class="w-full bg-[#081a2a] border border-[#29445b] text-white p-2.5 rounded-xl">
-          <option value="ACTIVE">Active (Authorized)</option>
-          <option value="PAUSED">Paused (Temporary Speed Limit)</option>
-          <option value="BLOCKED">Blocked (Disconnected)</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="flex justify-end gap-2 pt-3 border-t border-[#1f3a52]">
-      <button onclick="disconnectDevice()" class="bg-[#3b202b] text-[#ff9aab] border border-[#713949] font-bold text-xs px-4 py-2 rounded-xl">
-        Disconnect Device
-      </button>
-      <button onclick="saveDeviceConfig()" class="bg-[#29d6a1] text-[#041827] font-bold text-xs px-5 py-2 rounded-xl">
-        Save Lease Rules
-      </button>
-    </div>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="logo">⌁</div><div><b>LIN<span>BILLING</span></b><small>UNIVERSAL GATEWAY</small></div></div>
+ <div class="navlabel">CUSTOMER EXPERIENCE</div>
+ <nav class="nav" id="nav">
+  <button class="active" data-page="overview"><span class="ico">▦</span>Overview</button>
+  <button data-page="plans"><span class="ico">◈</span>Internet Packages</button>
+  <button data-page="checkout"><span class="ico">▣</span>Buy Internet</button>
+  <button data-page="admin"><span class="ico">▥</span>Admin Overview</button>
+ </nav>
+ <div class="side-bottom"><div class="network"><strong><i class="online-dot"></i>API Connected</strong><small id="apiStatusLabel">Ready for STK Push</small></div></div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+ <div style="display:flex;align-items:center;gap:12px"><button class="iconbtn mobilemenu" id="menuBtn">☰</button><div class="crumb" id="crumb">Overview<small>Lin Billing System (Tel: 0713100424)</small></div></div>
+ <div class="top-actions"><div class="avatar">LBS</div></div>
+</header>
+
+<div class="content">
+<!-- OVERVIEW -->
+<section class="page active" id="page-overview">
+ <div class="pagehead"><div><div class="eyebrow">LIN BILLING SYSTEM</div><h1>Smart Connectivity & Billing</h1><p>Manage access and collect live M-Pesa payments instantly.</p></div><button class="btn primary" data-goto="checkout">＋ Buy internet</button></div>
+ <div class="grid stats">
+  <div class="card"><div class="stat-top">Today's Revenue</div><div class="stat-value" id="statRevenue">KES 0</div><div class="stat-foot">Live Database</div></div>
+  <div class="card"><div class="stat-top">Active Sessions</div><div class="stat-value" id="statSessions">1</div><div class="stat-foot">Router Leases</div></div>
+  <div class="card"><div class="stat-top">Registered Users</div><div class="stat-value" id="statUsers">1</div><div class="stat-foot">Database Total</div></div>
+  <div class="card"><div class="stat-top">Grid Status</div><div class="stat-value" style="color:var(--green)">Grid Stable</div><div class="stat-foot">Main Node Active</div></div>
+ </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="page" id="page-plans">
+ <div class="pagehead"><div><div class="eyebrow">PLANS & PRICING</div><h1>Choose your access plan</h1><p>Select a plan to proceed to checkout.</p></div></div>
+ <div class="grid packagegrid" id="planCards"></div>
+</section>
+
+<!-- CHECKOUT -->
+<section class="page" id="page-checkout">
+ <div class="pagehead"><div><div class="eyebrow">SECURE CHECKOUT</div><h1>Buy internet access</h1><p>Trigger live Safaricom M-Pesa STK Push prompts instantly.</p></div></div>
+ <div class="grid cols">
+  <div class="card"><div class="cardtitle"><h3>Payment details</h3><span class="pill blue">STK PUSH</span></div>
+   <div class="field"><label>SELECT PACKAGE</label><select id="checkoutPlan"></select></div>
+   <div class="field" style="margin-top:14px"><label>SAFARICOM PHONE NUMBER</label><input id="checkoutPhone" type="tel" value="0713100424" placeholder="07XXXXXXXX"></div>
+   <button class="btn primary" id="startPayment" style="margin-top:18px;width:100%">🚀 REQUEST M-PESA STK PUSH NOW</button>
+   <div id="checkoutMsg"></div>
   </div>
+  <div class="card"><div class="cardtitle"><h3>Order summary</h3></div>
+   <div style="text-align:center;padding:20px">
+    <div class="muted">AMOUNT TO PAY</div>
+    <div class="speednum" id="checkoutAmount">KES 50</div>
+    <div id="checkoutDuration" class="muted">12 Hours access</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ADMIN -->
+<section class="page" id="page-admin">
+ <div class="pagehead"><div><div class="eyebrow">OPERATOR CONSOLE</div><h1>Admin overview</h1><p>Configure backend server URL, shortcodes, and live Daraja keys.</p></div><span class="pill green">AUTHENTICATED ADMIN</span></div>
+
+ <!-- BACKEND PROXY ENDPOINT CONFIGURATION -->
+ <div class="card" style="margin-bottom:16px">
+  <div class="cardtitle"><h3>Backend Proxy Server URL (Fixes CORS Blocks)</h3><span class="pill blue">BACKEND ENDPOINT</span></div>
+  <p class="muted" style="margin-top:0">Enter the URL of your Node.js backend proxy server (e.g., <code>http://localhost:3000</code> or your live server).</p>
+  <div class="field"><label>BACKEND PROXY URL</label><input id="adminBackendUrl" value="http://localhost:3000"></div>
+ </div>
+
+ <!-- DARAJA CONFIGURATION -->
+ <div class="card" style="margin-bottom:16px">
+  <div class="cardtitle"><h3>Safaricom Daraja API Credentials</h3><span class="pill amber">FULL EDITABLE MODE</span></div>
+  <div class="formgrid">
+   <div class="field"><label>ENVIRONMENT</label>
+    <select id="darajaEnv">
+     <option value="LIVE">Live Production (api.safaricom.co.ke)</option>
+     <option value="SANDBOX">Sandbox Test</option>
+    </select>
+   </div>
+   <div class="field"><label>SHORTCODE TYPE</label>
+    <select id="darajaType">
+     <option value="CustomerBuyGoodsOnline">Buy Goods / Till (CustomerBuyGoodsOnline)</option>
+     <option value="CustomerPayBillOnline">Paybill (CustomerPayBillOnline)</option>
+    </select>
+   </div>
+   <div class="field"><label>SHORTCODE (PAYBILL / TILL)</label><input id="darajaShortcode" value="257471"></div>
+   <div class="field"><label>PASSKEY</label><input id="darajaPasskey" value="PASTE_YOUR_LIVE_PASSKEY_HERE"></div>
+  </div>
+  <div class="actions" style="margin-top:14px"><button class="btn primary" id="saveDarajaBtn">SAVE DARAJA SETTINGS</button></div>
+  <div id="darajaMsg"></div>
+ </div>
+</section>
+</div>
+</main>
 </div>
 
-<!-- TOAST NOTIFICATION -->
-<div id="toast" class="fixed bottom-5 right-5 bg-[#15364a] border border-[#34718b] text-[#e8f8ff] px-4 py-3 rounded-xl shadow-2xl z-50 text-xs font-bold hidden transition"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 (() => {
-  'use strict';
+'use strict';
+const $ = id => document.getElementById(id);
 
-  // Titles for breadcrumb navigation
-  const titles = {
-    overview: ['Overview', 'Lin Live Gateway & M-Pesa STK Gateway'],
-    plans: ['Internet Packages', 'Choose your access plan & duration'],
-    checkout: ['Buy Internet', 'Live M-Pesa STK Push Payment via Daraja'],
-    voucher: ['Voucher Redemption', 'Redeem scratch cards & unique tokens'],
-    connection: ['Live Session Diagnostics', 'Gateway IP, MAC, & session timer'],
-    devices: ['Live Router Leases', 'Connected devices & bandwidth control'],
-    throttle: ['Data Caps & Throttle', 'Global speed & data consumption limits'],
-    history: ['M-Pesa Ledger', 'Confirmed STK push transactions'],
-    admin: ['Admin Overview', 'Payment recipient & package management'],
-    errors: ['Callback & Error Logs', 'HTTP payloads & API response traces'],
-    server: ['Express Server Script', 'Copy-paste Node.js backend server']
-  };
+let plans = [
+ {name:'1 Hour',title:'1 Hour',price:10,duration:'60 min',tag:'Quick'},
+ {name:'3 Hours',title:'3 Hours',price:20,duration:'180 min',tag:'Everyday'},
+ {name:'6 Hours',title:'6 Hours',price:30,duration:'360 min',tag:'Extended'},
+ {name:'12 Hours',title:'12 Hours',price:50,duration:'720 min',tag:'Popular'}
+];
+let selectedPlan = plans[3];
 
-  // State initialization
-  let plans = JSON.parse(localStorage.getItem('lin_plans_v3') || JSON.stringify([
-    { title: '1 Hour', duration: '60 min', price: 10, tag: 'Quick Browsing' },
-    { title: '3 Hours', duration: '180 min', price: 20, tag: 'Standard' },
-    { title: '6 Hours', duration: '360 min', price: 30, tag: 'Extended' },
-    { title: '12 Hours', duration: '720 min', price: 50, tag: 'Popular', popular: true },
-    { title: '24 Hours', duration: '1 Day', price: 80, tag: 'Full Day' },
-    { title: '7 Days', duration: '1 Week', price: 300, tag: 'Great Value' }
-  ]));
+function toast(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3200)}
 
-  let selectedPlan = plans[3];
-  let leases = [
-    { host: 'Galaxy-S22-Ultra', ip: '192.168.8.45', mac: 'A2:4F:88:12:9E:C1', speed: 15, status: 'ACTIVE' },
-    { host: 'Smart-TV-LivingRoom', ip: '192.168.8.62', mac: 'B4:14:CE:55:10:88', speed: 20, status: 'ACTIVE' },
-    { host: 'HP-Pavilion-Laptop', ip: '192.168.8.89', mac: '70:1C:E7:32:41:92', speed: 10, status: 'ACTIVE' }
-  ];
+window.go = function(page){
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));
+ document.querySelectorAll('#nav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+ $('sidebar').classList.remove('open');
+ window.scrollTo({top:0,behavior:'smooth'});
+};
 
-  let historyLogs = JSON.parse(localStorage.getItem('lin_ledger_v3') || JSON.stringify([
-    { date: new Date().toLocaleTimeString(), receipt: 'WS8920192', package: '12 Hours', amount: 50, phone: '254713100424', status: 'CONFIRMED' }
-  ]));
+document.querySelectorAll('[data-page],[data-goto]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.page||el.dataset.goto)));
+if($('menuBtn')) $('menuBtn').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
 
-  let errorLogs = [];
+function renderPlans(){
+ if($('planCards')){
+  $('planCards').innerHTML = plans.map((p,i)=>`
+   <article class="card packagecard">
+    <span class="eyebrow">${p.tag}</span>
+    <h3>${p.title}</h3>
+    <div class="muted">${p.duration} access</div>
+    <div class="bigprice">KES ${p.price}</div>
+    <button class="btn primary" style="width:100%" data-buy="${i}">SELECT PLAN →</button>
+   </article>
+  `).join('');
+  document.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>{
+   selectedPlan = plans[Number(b.dataset.buy)];
+   $('checkoutPlan').value = selectedPlan.name;
+   updateCheckout();
+   go('checkout');
+  }));
+ }
+ if($('checkoutPlan')){
+  $('checkoutPlan').innerHTML = plans.map(p=>`<option value="${p.name}">${p.title} — KES ${p.price}</option>`).join('');
+ }
+ updateCheckout();
+}
 
-  // Toast Function
-  window.toast = function(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.remove('hidden');
-    clearTimeout(window.toastTimer);
-    window.toastTimer = setTimeout(() => t.classList.add('hidden'), 3500);
-  };
+function updateCheckout(){
+ const p = plans.find(x=>x.name === $('checkoutPlan').value) || selectedPlan;
+ selectedPlan = p;
+ if($('checkoutAmount')) $('checkoutAmount').textContent = 'KES ' + p.price;
+ if($('checkoutDuration')) $('checkoutDuration').textContent = p.duration + ' access';
+}
+if($('checkoutPlan')) $('checkoutPlan').addEventListener('change', updateCheckout);
 
-  // Navigation Logic
-  window.go = function(pageId) {
-    if (!titles[pageId]) return;
+// LIVE STK PUSH REQUEST VIA BACKEND PROXY
+if($('startPayment')){
+ $('startPayment').addEventListener('click', async()=>{
+  const phone = $('checkoutPhone').value.trim();
+  const backendUrl = $('adminBackendUrl').value.trim().replace(/\/+$/, '');
+  const env = $('darajaEnv').value;
+  const shortcode = $('darajaShortcode').value.trim();
+  const passkey = $('darajaPasskey').value.trim();
+  const transactionType = $('darajaType').value;
 
-    // Toggle active section
-    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-    const target = document.getElementById('page-' + pageId);
-    if (target) target.classList.remove('hidden');
+  if(!phone) return toast('Please enter a phone number.');
 
-    // Update nav buttons styling
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      const active = b.dataset.page === pageId;
-      b.classList.toggle('bg-[#132b40]', active);
-      b.classList.toggle('text-white', active);
-      b.classList.toggle('border-[#4bdcf0]', active);
-    });
+  $('checkoutMsg').innerHTML = `<div class="notice">Dispatching Live STK Push to ${phone}...</div>`;
 
-    // Update breadcrumb
-    const crumb = document.getElementById('crumb');
-    if (crumb) {
-      crumb.innerHTML = `${titles[pageId][0]} <span class="block text-[11px] font-normal text-[#91a8bd]">${titles[pageId][1]}</span>`;
-    }
+  try {
+   const response = await fetch(`${backendUrl}/api/stkpush`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+     phone: phone,
+     amount: selectedPlan.price,
+     shortcode: shortcode,
+     passkey: passkey,
+     transactionType: transactionType,
+     env: env
+    })
+   });
 
-    // Close sidebar on mobile
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-      sidebar.classList.add('left-[-280px]');
-      sidebar.classList.remove('left-0');
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // Mobile menu button toggle
-  const menuBtn = document.getElementById('menuBtn');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const sidebar = document.getElementById('sidebar');
-      if (sidebar.classList.contains('left-[-280px]')) {
-        sidebar.classList.remove('left-[-280px]');
-        sidebar.classList.add('left-0');
-      } else {
-        sidebar.classList.add('left-[-280px]');
-        sidebar.classList.remove('left-0');
-      }
-    });
+   const result = await response.json();
+   if(result.success) {
+    const data = result.data;
+    $('checkoutMsg').innerHTML = `
+     <div class="notice good">
+      <b>✓ STK PUSH PROMPT SENT TO PHONE!</b><br>
+      CheckoutRequestID: <code>${data.CheckoutRequestID}</code><br>
+      Message: ${data.CustomerMessage || 'Success'}<br><br>
+      Please check your phone screen and enter your M-Pesa PIN!
+     </div>
+    `;
+    toast('STK Push sent successfully!');
+   } else {
+    throw new Error(JSON.stringify(result.error));
+   }
+  } catch(err) {
+   $('checkoutMsg').innerHTML = `
+    <div class="notice danger">
+     <b>STK Push Failed:</b><br>${err.message}<br><br>
+     <i>Ensure your Node.js backend proxy (server.js) is running and reachable.</i>
+    </div>
+   `;
+   toast('Failed to dispatch prompt.');
   }
+ });
+}
 
-  // Render Plans
-  function renderPlans() {
-    const grid = document.getElementById('planCardsGrid');
-    const select = document.getElementById('checkoutPlanSelect');
-    const adminRows = document.getElementById('adminPackageRows');
+if($('saveDarajaBtn')){
+ $('saveDarajaBtn').addEventListener('click',()=>{
+  toast('Settings saved successfully.');
+  $('darajaMsg').innerHTML = `<div class="notice good">Configuration updated for shortcode <b>${$('darajaShortcode').value}</b></div>`;
+ });
+}
 
-    if (grid) {
-      grid.innerHTML = plans.map((p, idx) => `
-        <div onclick="selectCheckoutPlan(${idx})" class="bg-[#10263a] border ${p.popular ? 'border-[#4bdcf0]' : 'border-[#20394e]'} hover:border-[#4bdcf0] rounded-2xl p-5 cursor-pointer transition flex flex-col justify-between relative overflow-hidden">
-          ${p.popular ? '<div class="absolute top-0 right-0 bg-[#4bdcf0] text-[#041827] text-[9px] font-black px-3 py-1 rounded-bl-xl uppercase">Popular</div>' : ''}
-          <div>
-            <div class="text-[10px] text-[#4bdcf0] font-extrabold uppercase">${p.tag}</div>
-            <div class="text-xl font-bold font-manrope text-white mt-1">${p.title}</div>
-            <div class="text-3xl font-black font-manrope text-[#29d6a1] my-3">KES ${p.price}</div>
-            <p class="text-xs text-[#91a8bd]">${p.duration} high-speed unlimited access.</p>
-          </div>
-          <button class="w-full mt-4 bg-[#142b40] hover:bg-[#29d6a1] hover:text-[#041827] text-white font-bold text-xs py-2.5 rounded-xl transition">
-            SELECT THIS PLAN →
-          </button>
-        </div>
-      `).join('');
-    }
-
-    if (select) {
-      select.innerHTML = plans.map(p => `<option value="${p.title}">KES ${p.price} — ${p.title} (${p.duration})</option>`).join('');
-    }
-
-    if (adminRows) {
-      adminRows.innerHTML = plans.map((p, i) => `
-        <tr>
-          <td class="p-3 font-bold">${p.title}</td>
-          <td class="p-3 text-[#91a8bd]">${p.duration}</td>
-          <td class="p-3 font-mono text-[#29d6a1]">KES ${p.price}</td>
-          <td class="p-3"><span class="bg-[#15334b] text-[#8bcaff] text-[10px] px-2 py-0.5 rounded-full font-bold">${p.tag}</span></td>
-          <td class="p-3"><button onclick="deletePackage(${i})" class="text-[#ff9aab] hover:underline">Delete</button></td>
-        </tr>
-      `).join('');
-    }
-  }
-
-  window.selectCheckoutPlan = function(idx) {
-    selectedPlan = plans[idx] || plans[0];
-    document.getElementById('checkoutPlanSelect').value = selectedPlan.title;
-    updateCheckoutSummary();
-    go('checkout');
-
-    setTimeout(() => {
-      const el = document.getElementById('checkoutScrollTarget');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  };
-
-  function updateCheckoutSummary() {
-    const val = document.getElementById('checkoutPlanSelect').value;
-    const found = plans.find(p => p.title === val) || selectedPlan;
-    selectedPlan = found;
-
-    document.getElementById('checkoutSummaryPrice').textContent = 'KES ' + found.price;
-    document.getElementById('checkoutSummaryDuration').textContent = `${found.title} (${found.duration}) internet access.`;
-  }
-  document.getElementById('checkoutPlanSelect').addEventListener('change', updateCheckoutSummary);
-
-  // Live STK Push Execution (Live Daraja OAuth & STK Push Handler with direct CORS fallback)
-  window.triggerLiveStkPush = async function() {
-    const btn = document.getElementById('triggerStkBtn');
-    const box = document.getElementById('stkResponseBox');
-    const phoneInput = document.getElementById('checkoutPhoneInput').value.trim();
-
-    if (!phoneInput) {
-      toast('Please enter a valid phone number.');
-      return;
-    }
-
-    const formattedPhone = phoneInput.replace(/^0/, '254');
-    btn.disabled = true;
-    btn.innerHTML = '<span>⏳ DISPATCHING STK PUSH...</span>';
-    box.classList.remove('hidden');
-    box.className = 'rounded-xl p-4 text-xs font-mono border border-blue-500 bg-[#0a1e30] text-blue-200 block space-y-2';
-    box.innerHTML = `<div>[1/2 GENERATING AUTH TOKEN] Connecting to Safaricom Daraja API...</div>`;
-
-    const consumerKey = 'AGJGJGGktfRf8OHhos6TJXKupDMb3f2wG9pZDdF8tG5qm0qK';
-    const consumerSecret = 'xmd2sXJzRA6Chl1KHGvR9jG0qtSBse1oRBCdgBjb4DnO7SEi4QzPVwKNWWraubJd';
-    const passkey = '103f80194fedeaefb352960fb340d766ef3f84a9dcb96aafdd21d0b0bb8dfbab';
-    const shortcode = document.getElementById('adminShortcodeInput').value.trim() || '174379';
-
-    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 14);
-    const password = btoa(shortcode + passkey + timestamp);
-
-    try {
-      // Attempt live dispatch via cors-anywhere / direct proxy or fallback direct authorization
-      const auth = btoa(`${consumerKey}:${consumerSecret}`);
-      let token = null;
-
-      box.innerHTML += `<div>[2/2 TRIGGERING LNMO STK PUSH] Dispatching KES ${selectedPlan.price} prompt to ${formattedPhone}...</div>`;
-
-      // Simulating live execution response (in real deployment connects directly to node backend or proxy)
-      await new Promise(res => setTimeout(res, 1500));
-
-      const checkoutID = 'ws_CO_' + Date.now();
-
-      box.className = 'rounded-xl p-4 text-xs font-mono border border-emerald-500 bg-[#07241c] text-emerald-300 block space-y-2';
-      box.innerHTML = `
-        <div class="font-bold text-white">✓ STK PUSH PROMPT DISPATCHED TO PHONE!</div>
-        <div>CheckoutRequestID: <span class="text-[#4bdcf0]">${checkoutID}</span></div>
-        <div>MerchantRequestID: 91823-718291-1</div>
-        <div>ResponseCode: 0 (Success)</div>
-        <div>CustomerMessage: Success. Request accepted for processing.</div>
-        <div class="text-[11px] text-[#8ce2c8] mt-2">Please check phone screen (${phoneInput}) and enter your M-Pesa PIN!</div>
-      `;
-
-      toast(`STK Push sent to ${phoneInput}!`);
-
-      // Add to M-Pesa Ledger
-      historyLogs.unshift({
-        date: new Date().toLocaleTimeString(),
-        receipt: checkoutID.slice(0, 12),
-        package: selectedPlan.title,
-        amount: selectedPlan.price,
-        phone: formattedPhone,
-        status: 'PENDING PIN'
-      });
-      localStorage.setItem('lin_ledger_v3', JSON.stringify(historyLogs));
-      renderHistory();
-
-      // Log success trace
-      logError('Live STK Push', 200, `Successfully requested STK Push for ${selectedPlan.title} (KES ${selectedPlan.price}) to ${formattedPhone}`);
-
-    } catch (err) {
-      box.className = 'rounded-xl p-4 text-xs font-mono border border-red-500 bg-[#280d16] text-red-300 block space-y-2';
-      box.innerHTML = `
-        <div class="font-bold">✕ DARAJA API ERROR</div>
-        <div>Error: ${err.message}</div>
-      `;
-      logError('STK Dispatch Error', 500, err.message);
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<span>🚀 REQUEST M-PESA STK PUSH NOW</span>';
-    }
-  };
-
-  // Voucher Redemption
-  window.redeemVoucher = function() {
-    const input = document.getElementById('voucherInput');
-    const status = document.getElementById('voucherStatus');
-    const code = input.value.trim().toUpperCase();
-
-    if (!code) {
-      toast('Please enter a voucher code.');
-      return;
-    }
-
-    status.classList.remove('hidden');
-    if (code.startsWith('LIN-')) {
-      status.className = 'p-3 rounded-xl text-xs font-semibold bg-[#10352d] text-[#29d6a1] border border-[#1e6653]';
-      status.textContent = `✓ Voucher ${code} verified! Device authorized for 24 Hours.`;
-      input.value = '';
-      toast('Voucher redeemed successfully!');
-    } else {
-      status.className = 'p-3 rounded-xl text-xs font-semibold bg-[#3b202b] text-[#ff9aab] border border-[#713949]';
-      status.textContent = `✕ Invalid voucher code. Format must start with LIN- (e.g. LIN-8849-2026).`;
-    }
-  };
-
-  // Router Leases & Controls
-  function renderLeases() {
-    const tbody = document.getElementById('dhcpTableRows');
-    if (!tbody) return;
-
-    tbody.innerHTML = leases.map((l, i) => `
-      <tr onclick="openDeviceModal('${l.host}', '${l.ip}', '${l.mac}', ${l.speed}, '${l.status}')" class="hover:bg-[#122b42] cursor-pointer transition">
-        <td class="p-4 font-bold text-white">${l.host}</td>
-        <td class="p-4 font-mono text-[#91a8bd]">${l.ip}</td>
-        <td class="p-4 font-mono text-[#91a8bd]">${l.mac}</td>
-        <td class="p-4 font-mono text-[#4bdcf0]">${l.speed} Mbps</td>
-        <td class="p-4">
-          <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${l.status === 'ACTIVE' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-rose-950 text-rose-400 border border-rose-800'}">
-            ${l.status}
-          </span>
-        </td>
-      </tr>
-    `).join('');
-  }
-
-  window.refreshLeases = function() {
-    renderLeases();
-    toast('Router DHCP leases refreshed.');
-  };
-
-  window.openDeviceModal = function(host, ip, mac, speed, status) {
-    document.getElementById('devModalHost').textContent = host;
-    document.getElementById('devModalIp').textContent = ip;
-    document.getElementById('devModalMacText').textContent = mac;
-    document.getElementById('devModalMac').value = mac;
-    document.getElementById('devSpeedRange').value = speed;
-    document.getElementById('devSpeedVal').textContent = speed + ' Mbps';
-    document.getElementById('devAccessStatus').value = status;
-    document.getElementById('deviceModal').classList.remove('hidden');
-    document.getElementById('deviceModal').classList.add('flex');
-  };
-
-  window.closeDeviceModal = function() {
-    document.getElementById('deviceModal').classList.add('hidden');
-    document.getElementById('deviceModal').classList.remove('flex');
-  };
-
-  window.saveDeviceConfig = function() {
-    const mac = document.getElementById('devModalMac').value;
-    const speed = Number(document.getElementById('devSpeedRange').value);
-    const status = document.getElementById('devAccessStatus').value;
-
-    const dev = leases.find(l => l.mac === mac);
-    if (dev) {
-      dev.speed = speed;
-      dev.status = status;
-      renderLeases();
-      toast(`Updated lease rule for ${mac}`);
-    }
-    closeDeviceModal();
-  };
-
-  window.disconnectDevice = function() {
-    document.getElementById('devAccessStatus').value = 'BLOCKED';
-    saveDeviceConfig();
-  };
-
-  // Bandwidth & Caps
-  window.saveGlobalThrottle = function() {
-    const val = document.getElementById('globalSpeedInput').value;
-    toast(`Global speed ceiling enforced at ${val}`);
-  };
-
-  window.saveGlobalDataCap = function() {
-    const val = document.getElementById('globalDataCapInput').value;
-    toast(`Global data cap updated to ${val} MB`);
-  };
-
-  // Admin Actions
-  window.saveAdminSettings = function() {
-    const phone = document.getElementById('adminPhoneInput').value.trim();
-    const shortcode = document.getElementById('adminShortcodeInput').value.trim();
-
-    if (!phone || !shortcode) {
-      toast('Please provide a phone number and shortcode.');
-      return;
-    }
-
-    document.getElementById('topBarPhone').textContent = phone;
-    document.getElementById('statTargetPhone').textContent = phone;
-    document.getElementById('sideStatusText').textContent = `Shortcode: ${shortcode} Ready`;
-    document.getElementById('checkoutShortcodeDisplay').value = `${shortcode} (Daraja Live API)`;
-
-    toast('Admin recipient settings & Till bound successfully!');
-  };
-
-  window.addNewPackage = function() {
-    const title = document.getElementById('newPkgTitle').value.trim();
-    const duration = document.getElementById('newPkgDuration').value.trim();
-    const price = Number(document.getElementById('newPkgPrice').value);
-    const tag = document.getElementById('newPkgTag').value.trim() || 'Standard';
-
-    if (!title || !duration || isNaN(price) || price <= 0) {
-      toast('Invalid package details.');
-      return;
-    }
-
-    plans.push({ title, duration, price, tag });
-    localStorage.setItem('lin_plans_v3', JSON.stringify(plans));
-    renderPlans();
-
-    document.getElementById('newPkgTitle').value = '';
-    document.getElementById('newPkgDuration').value = '';
-    document.getElementById('newPkgPrice').value = '';
-    document.getElementById('newPkgTag').value = '';
-
-    toast('New package plan added successfully!');
-  };
-
-  window.deletePackage = function(idx) {
-    if (plans.length <= 1) {
-      toast('At least one package is required.');
-      return;
-    }
-    plans.splice(idx, 1);
-    localStorage.setItem('lin_plans_v3', JSON.stringify(plans));
-    renderPlans();
-    toast('Package deleted.');
-  };
-
-  // History Ledger
-  function renderHistory() {
-    const tbody = document.getElementById('historyTableRows');
-    if (!tbody) return;
-
-    tbody.innerHTML = historyLogs.map(h => `
-      <tr>
-        <td class="p-4 text-[#91a8bd]">${h.date}</td>
-        <td class="p-4 font-mono font-bold text-white">${h.receipt}</td>
-        <td class="p-4">${h.package}</td>
-        <td class="p-4 font-mono text-[#29d6a1]">KES ${h.amount}</td>
-        <td class="p-4 font-mono">${h.phone}</td>
-        <td class="p-4"><span class="bg-[#10352d] text-[#29d6a1] text-[10px] font-bold px-2.5 py-1 rounded-full">${h.status}</span></td>
-      </tr>
-    `).join('');
-  }
-
-  window.exportLedgerCsv = function() {
-    let csv = 'Timestamp,Receipt,Package,Amount,Phone,Status\n';
-    historyLogs.forEach(h => {
-      csv += `"${h.date}","${h.receipt}","${h.package}",${h.amount},"${h.phone}","${h.status}"\n`;
-    });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `mpesa_ledger_${Date.now()}.csv`;
-    a.click();
-    toast('M-Pesa Ledger CSV exported.');
-  };
-
-  // Diagnostics & Error Trace
-  function logError(source, status, details) {
-    errorLogs.unshift({ time: new Date().toLocaleTimeString(), source, status, details });
-    const tbody = document.getElementById('errorLogTableRows');
-    if (!tbody) return;
-
-    tbody.innerHTML = errorLogs.map(e => `
-      <tr>
-        <td class="p-4 text-[#91a8bd]">${e.time}</td>
-        <td class="p-4 text-[#4bdcf0]">${e.source}</td>
-        <td class="p-4 text-[#ffb45f]">${e.status}</td>
-        <td class="p-4 text-white">${e.details}</td>
-      </tr>
-    `).join('');
-  }
-
-  window.clearErrorLogs = function() {
-    errorLogs = [];
-    document.getElementById('errorLogTableRows').innerHTML = '<tr><td colspan="4" class="p-4 text-center text-[#91a8bd]">No logged errors.</td></tr>';
-    toast('Error logs cleared.');
-  };
-
-  window.copyServerCode = function() {
-    const code = document.querySelector('pre').textContent;
-    navigator.clipboard.writeText(code);
-    toast('Node.js Backend Code copied to clipboard!');
-  };
-
-  // Session Timer
-  let secondsLeft = 43185;
-  setInterval(() => {
-    secondsLeft--;
-    if (secondsLeft < 0) secondsLeft = 43200;
-    const h = Math.floor(secondsLeft / 3600);
-    const m = Math.floor((secondsLeft % 3600) / 60);
-    const s = secondsLeft % 60;
-    const el = document.getElementById('sessionCountdown');
-    if (el) el.textContent = `${String(h).padStart(2, '0')}h : ${String(m).padStart(2, '0')}m : ${String(s).padStart(2, '0')}s`;
-  }, 1000);
-
-  // Initialize
-  renderPlans();
-  renderLeases();
-  renderHistory();
-  logError('System Init', 200, 'Live Daraja Billing System loaded. Navigation & credentials active.');
-
+renderPlans();
 })();
 </script>
 </body>
